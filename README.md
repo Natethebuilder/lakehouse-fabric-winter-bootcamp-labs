@@ -3,11 +3,21 @@
 **Build a Microsoft Fabric lakehouse with AI: 15-minute introduction +
 45-minute hands-on lab.**
 
-Start from an **empty workspace with a dedicated active F2**. Chloe (`C003`)
-orders in Utrecht on 11 October (`O1003`), then moves to Amsterdam / Gold on
-2 November. Keep both versions; link the sale to the version valid that day.
-Bronze preserves the source, Silver remembers changes, Gold matches by sale
-date, and MLVs verify the final batch.
+Start from an **empty workspace with a dedicated active F2**.
+
+## The story: the customer moved; the sale didn't
+
+On 11 October, Chloe (`C003`) places order `O1003` while her profile says
+Utrecht / Silver. On 2 November, she moves to Amsterdam and her profile
+becomes Amsterdam / Gold. Both answers are true: her profile is now
+Amsterdam / Gold, but the October sale must stay linked to the Utrecht /
+Silver version that was valid when she bought.
+
+Follow that one story through the layers: Bronze keeps the source; Silver
+remembers both dated customer versions; Gold matches each sale to the version
+valid on its date; materialized lake views (MLVs) serve and reconcile the
+results after the change batch. The key question is always: **who was the
+customer when this sale happened?**
 
 ## Get started
 
