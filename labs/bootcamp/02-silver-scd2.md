@@ -10,6 +10,13 @@
 Choose your strategy, approve your cells and run only Silver. Wait for your
 own PASS before Gold; do not copy another participant's keys or results.
 
+## The story behind the code
+
+The starting snapshot says Chloe (`C003`) lives in Utrecht and has Silver
+loyalty; her order `O1003` is dated 11 October. On 2 November, the update opens
+an Amsterdam / Gold version. Silver closes the old version at the change date
+and keeps it; it does not overwrite history.
+
 Open `nb_bootcamp_silver`. It has its own description, validator, fixed
 baseline cell and fixed check cell; session variables and temporary views do
 not carry over from Bronze, so the generated cells declare what they need.
@@ -23,13 +30,13 @@ Use the spark-cli skill.
 Goal: build Silver in lh_bootcamp. First ask me to choose the customer_sk
 strategy (decision 4).
 Read Bronze through table_changes().
-Generate NEW native Spark SQL as %%sql cells in nb_bootcamp_silver from spec
+Generate NEW Spark SQL as %%sql cells in nb_bootcamp_silver from spec
 sections 3 and 5.
 Create only silver tables and their lab_ops watermarks.
 Validate with the fixed check and report its row counts.
 Preserve Bronze.
-Show the cells, the SCD2 validity rule and the exact write set. Stop for my
-code approval.
+Explain the close/open of C003's Utrecht history.
+Show the cells and exact write set. Stop for my code approval.
 ```
 
 **Decision 4 · choose the customer key.** Both options satisfy the contract

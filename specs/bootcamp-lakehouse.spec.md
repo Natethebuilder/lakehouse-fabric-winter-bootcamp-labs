@@ -8,6 +8,21 @@
 | Inputs | Five immutable initial CSVs (Lab 1) and one customer change CSV (Lab 4) under `Files/bootcamp/` |
 | Acceptance | Unchanged [fixed validator](../labs/bootcamp/validate-lakehouse.py) plus execution, CDF and MLV evidence |
 
+## The customer story
+
+Chloe (`C003`) places order `O1003` on 11 October while her profile is Utrecht
+/ Silver. On 2 November she becomes Amsterdam / Gold. The current profile
+changes; the October order must stay linked to Chloe's Utrecht / Silver
+version, which was valid on the order date.
+
+The four labs tell this one story: Bronze keeps what arrived; Silver preserves
+both customer versions; Gold matches a sale to the customer version valid at
+purchase; MLVs serve a current profile and reconciled sales totals. In the
+generated SQL, explain the key rule in plain language:
+`order_ts >= valid_from AND order_ts < valid_to`. Lab 4 also inserts C007 and
+removes C002's current state without deleting its history. Do not change
+fixtures, checks or outputs to make the narrative fit.
+
 ## 1. Authoring and execution
 
 AI proposes the architecture and implementation from this business goal and

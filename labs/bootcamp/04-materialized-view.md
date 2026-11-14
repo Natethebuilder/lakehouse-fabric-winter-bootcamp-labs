@@ -11,6 +11,13 @@ run MLV once. As soon as it passes, make decision 10 and launch your pipeline.
 Aim to launch by session minute 47; this is a pacing target, not a runtime
 guarantee. If a prerequisite failed, stop and get help instead of skipping it.
 
+## Close the story
+
+After the batch, Chloe's current profile is Amsterdam / Gold, but `O1003`
+(11 October) remains linked to her Utrecht / Silver version. C007 has joined;
+C002 has no current row, but its history remains. This answers the opening
+question without changing the historical sale.
+
 Open `nb_bootcamp_mlv`. Its description, validator and fixed check cell are
 already present. The goal is two real Fabric materialized lake views over
 Silver, not merely queries returning the same numbers. Then a customer change

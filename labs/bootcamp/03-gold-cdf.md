@@ -10,6 +10,19 @@
 review your own cells. Run Gold only after Silver passes. Keep the actual
 CDF bounds as evidence; matching totals alone do not prove incremental processing.
 
+## The story behind the code
+
+Chloe (`C003`)'s order `O1003` is dated 11 October, before her 2 November move.
+Gold links that sale to her Utrecht / Silver version, even though Amsterdam /
+Gold is now current. The SQL uses the order timestamp to choose the matching version:
+
+```sql
+o.order_ts >= c.valid_from AND o.order_ts < c.valid_to
+```
+
+In plain language: use the customer row whose effective dates include the
+order date.
+
 Open `nb_bootcamp_gold`. It reads only Silver; session variables and
 temporary views do not carry over from other notebooks, so the generated
 cells declare what they need. Keep the fixed cells unchanged.
@@ -27,8 +40,8 @@ sections 3, 6 and 8.
 Create only gold tables and their lab_ops watermarks.
 Validate with the fixed check and report its row counts.
 Preserve Bronze and Silver.
-Explain replay safety and the as-of customer join.
-Show the cells and the exact write set. Stop for my code approval.
+Explain why O1003 links to Utrecht / Silver. Show cells and write set.
+Stop for my code approval.
 ```
 
 **Decision 7 · approve the Gold code.** Check:
