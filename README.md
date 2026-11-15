@@ -7,10 +7,10 @@ Start from an **empty workspace with a dedicated active F2**.
 
 ## The story: the customer moved; the sale didn't
 
-On 11 October, Chloe (`C003`) buys order `O1003` while her profile is Utrecht /
-Silver. On 2 November, she moves; her current profile becomes Amsterdam /
-Gold. A report needs both answers: who Chloe is now, and which version was
-true when she bought. The October sale stays linked to Utrecht / Silver.
+On 11 October, Chloe (`C003`) places order `O1003`: Utrecht / Plus rewards.
+On 2 November, she moves: Amsterdam / Premium rewards. The report shows her
+current profile, but October's sale stays linked to Utrecht / Plus.
+Customer reward levels are **Standard, Plus and Premium**, not lakehouse layers.
 
 **Lab goal:** build a lakehouse that preserves the source and customer
 history, matches each sale to the version valid on its date, and serves checked

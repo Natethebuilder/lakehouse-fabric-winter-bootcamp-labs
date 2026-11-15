@@ -13,8 +13,8 @@ guarantee. If a prerequisite failed, stop and get help instead of skipping it.
 
 ## Close the story
 
-After the batch, Chloe's current profile is Amsterdam / Gold, but `O1003`
-(11 October) remains linked to her Utrecht / Silver version. C007 has joined;
+After the batch, Chloe's current profile is Amsterdam / Premium, but `O1003`
+(11 October) remains linked to her Utrecht / Plus version. C007 has joined;
 C002 has no current row, but its history remains. This answers the opening
 question without changing the historical sale.
 
@@ -131,7 +131,7 @@ label any stage that needed recovery.
 - The change file is uploaded and verified; one `pl_bootcamp_build` run
   succeeds and every stage reports
   `PASS: bootcamp <stage> contract, after the customer change batch (fixed read-only checks)`.
-- C003 has an expired and a current version (Amsterdam, Gold), C007 one
+- C003 has an expired and a current version (Amsterdam, Premium), C007 one
   current version and C002 no current version but retained history, in both
   `silver.customer_history` and `gold.dim_customer`; `gold.customer_current`
   has six customers.

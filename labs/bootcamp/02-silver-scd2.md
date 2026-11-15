@@ -12,9 +12,9 @@ own PASS before Gold; do not copy another participant's keys or results.
 
 ## The story behind the code
 
-The starting snapshot says Chloe (`C003`) lives in Utrecht and has Silver
+The starting snapshot says Chloe (`C003`) lives in Utrecht and has Plus
 loyalty; her order `O1003` is dated 11 October. On 2 November, the update opens
-an Amsterdam / Gold version. Silver closes the old version at the change date
+an Amsterdam / Premium version. Silver closes the old version at the change date
 and keeps it; it does not overwrite history.
 
 Open `nb_bootcamp_silver`. It has its own description, validator, fixed

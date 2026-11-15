@@ -11,8 +11,8 @@
 ## The customer story
 
 Chloe (`C003`) places order `O1003` on 11 October while her profile is Utrecht
-/ Silver. On 2 November she becomes Amsterdam / Gold. The current profile
-changes; the October order must stay linked to Chloe's Utrecht / Silver
+/ Plus. On 2 November she becomes Amsterdam / Premium. The current profile
+changes; the October order must stay linked to Chloe's Utrecht / Plus
 version, which was valid on the order date.
 
 The four labs tell this one story: Bronze keeps what arrived; Silver preserves
@@ -27,6 +27,16 @@ This is a realistic lakehouse use case: customer profiles change, but
 historical sales must remain accurate and explainable. The lab goal is to build
 and verify a data path that answers both “Who is the customer now?” and
 “Which version was valid when this sale happened?”
+
+Customer reward levels in `loyalty_tier` are **Standard**, **Plus** and
+**Premium**. Chloe has Plus rewards at purchase and Premium rewards after
+the change batch. These labels describe customers, not the Bronze, Silver
+and Gold lakehouse layers. No reward benefits or qualification rules are
+part of the exercise.
+
+Use both customer CSVs from the same repository revision throughout a lab.
+Keep an in-progress build on its original fixture revision; do not overwrite
+already-landed source files or reset tables to adopt different labels.
 
 ## 1. Authoring and execution
 
@@ -198,7 +208,7 @@ The batch is effective at `2026-11-02T00:00:00`:
 
 | Operation | Customer | Required outcome |
 |---|---|---|
-| U | C003 | Expire Utrecht/Silver; insert Amsterdam/Gold |
+| U | C003 | Expire Utrecht/Plus; insert Amsterdam/Premium |
 | I | C007 | Insert one current customer version |
 | D | C002 | Remove current Bronze state; expire Silver history without removing it |
 
@@ -558,7 +568,7 @@ bootcamp <stage> was already current and the rerun changed nothing` when it
 did, as on an optional second **Run all** in the warm session.
 
 After the change batch and one pipeline run, C003 has an expired and a
-current version (Amsterdam, Gold), C007 has one current version and C002 has
+current version (Amsterdam, Premium), C007 has one current version and C002 has
 no current version but keeps its history, in both `silver.customer_history`
 and `gold.dim_customer`; `gold.customer_current` has six rows. A partial change state
 is not a valid checkpoint. After a terminal pipeline failure, preserve the

@@ -13,8 +13,8 @@ CDF bounds as evidence; matching totals alone do not prove incremental processin
 ## The story behind the code
 
 Chloe (`C003`)'s order `O1003` is dated 11 October, before her 2 November move.
-Gold links that sale to her Utrecht / Silver version, even though Amsterdam /
-Gold is now current. The SQL uses the order timestamp to choose the matching version:
+Gold links that sale to her Utrecht / Plus version, even though Amsterdam /
+Premium is now current. The SQL uses the order timestamp to choose the matching version:
 
 ```sql
 o.order_ts >= c.valid_from AND o.order_ts < c.valid_to
@@ -40,7 +40,7 @@ sections 3, 6 and 8.
 Create only gold tables and their lab_ops watermarks.
 Validate with the fixed check and report its row counts.
 Preserve Bronze and Silver.
-Explain why O1003 links to Utrecht / Silver. Show cells and write set.
+Explain why O1003 links to Utrecht / Plus. Show cells and write set.
 Stop for my code approval.
 ```
 

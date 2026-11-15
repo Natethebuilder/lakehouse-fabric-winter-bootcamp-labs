@@ -10,8 +10,8 @@
 own workspace name. While your job runs, review the generated cells and wait;
 do not launch another run. Your own PASS, not the instructor's, unlocks Lab 2.
 
-**Story:** keep Chloe (`C003`)'s original Utrecht / Silver row and order
-`O1003` as received. Her later move to Amsterdam / Gold must not rewrite it.
+**Story:** keep Chloe (`C003`)'s original Utrecht / Plus row and order
+`O1003` as received. Her later move to Amsterdam / Premium must not rewrite it.
 
 Start Copilot from the repo root with your assigned **empty workspace** on its
 dedicated active F2 capacity. No lakehouse, uploaded files, notebooks or warm
