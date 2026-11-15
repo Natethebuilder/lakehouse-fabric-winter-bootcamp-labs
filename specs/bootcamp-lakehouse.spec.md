@@ -23,6 +23,11 @@ generated SQL, explain the key rule in plain language:
 removes C002's current state without deleting its history. Do not change
 fixtures, checks or outputs to make the narrative fit.
 
+This is a realistic lakehouse use case: customer profiles change, but
+historical sales must remain accurate and explainable. The lab goal is to build
+and verify a data path that answers both “Who is the customer now?” and
+“Which version was valid when this sale happened?”
+
 ## 1. Authoring and execution
 
 AI proposes the architecture and implementation from this business goal and

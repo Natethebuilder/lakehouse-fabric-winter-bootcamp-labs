@@ -7,17 +7,17 @@ Start from an **empty workspace with a dedicated active F2**.
 
 ## The story: the customer moved; the sale didn't
 
-On 11 October, Chloe (`C003`) places order `O1003` while her profile says
-Utrecht / Silver. On 2 November, she moves to Amsterdam and her profile
-becomes Amsterdam / Gold. Both answers are true: her profile is now
-Amsterdam / Gold, but the October sale must stay linked to the Utrecht /
-Silver version that was valid when she bought.
+On 11 October, Chloe (`C003`) buys order `O1003` while her profile is Utrecht /
+Silver. On 2 November, she moves; her current profile becomes Amsterdam /
+Gold. A report needs both answers: who Chloe is now, and which version was
+true when she bought. The October sale stays linked to Utrecht / Silver.
 
-Follow that one story through the layers: Bronze keeps the source; Silver
-remembers both dated customer versions; Gold matches each sale to the version
-valid on its date; materialized lake views (MLVs) serve and reconcile the
-results after the change batch. The key question is always: **who was the
-customer when this sale happened?**
+**Lab goal:** build a lakehouse that preserves the source and customer
+history, matches each sale to the version valid on its date, and serves checked
+results. This use case matters because customer details change in real
+systems, while historical sales must stay accurate. Bronze keeps the source;
+Silver remembers both versions; Gold answers “who was the customer then?”;
+materialized lake views (MLVs) reconcile the results after the batch.
 
 ## Get started
 
