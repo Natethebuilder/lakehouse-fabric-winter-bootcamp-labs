@@ -34,6 +34,14 @@ the change batch. These labels describe customers, not the Bronze, Silver
 and Gold lakehouse layers. No reward benefits or qualification rules are
 part of the exercise.
 
+**Exercise timeline:** Labs 1-3 and the first MLV run use only the initial
+snapshot. Chloe is still Utrecht / Plus, with one current version among six
+customer-history rows. Lab 2 builds the history-handling logic; it does not
+apply her move. Only Lab 4's approved file upload and pipeline make Amsterdam /
+Premium current. Afterward there are eight history rows and six current
+customers; O1003 remains Utrecht / Plus. Talk examples preview that ending,
+not data already loaded into your workspace.
+
 Use both customer CSVs from the same repository revision throughout a lab.
 Keep an in-progress build on its original fixture revision; do not overwrite
 already-landed source files or reset tables to adopt different labels.
@@ -45,6 +53,16 @@ the fixed contracts below. The participant approves layer boundaries, table
 flow, history policy, serving choices and each write set before execution.
 Use short plans and numbered tasks under `specs/plans/`, as described in the
 [guardrails](../.github/copilot-instructions.md).
+
+For participants new to agentic development, start with the
+[pre-work orientation and glossary](../labs/bootcamp/pre-work.md#how-you-and-copilot-work-together).
+Copilot proposes and uses tools within the approved scope; the participant
+decides; Fabric executes; fixed checks test actual results. Use one
+conversation from the repository root and one prompt at a time. PowerShell
+commands, Copilot prompts and Fabric notebook output belong in different
+places. Ask for a plain-language explanation of the read set, write set and
+expected check before approving. Restarting a conversation requires confirming
+existing resources and job state, not rerunning setup.
 
 Pre-work is tools, repository clone, sign-in and read-only access checks only.
 Each participant receives an empty workspace with a dedicated capacity already
@@ -107,7 +125,8 @@ layer. Use one execution path per stage: a notebook job or manual interactive
 cells, never both concurrently. Include cold Spark startup; do not assume
 session reuse.
 
-Every SQL write is guarded so that a rerun without new input commits nothing:
+Bronze, Silver and Gold table writes are guarded so that a rerun without
+new input commits nothing (MLV definitions are replaced separately):
 `CREATE TABLE IF NOT EXISTS`, MERGE clauses that match only rows that actually
 differ, and watermarks that skip versions already processed. The fixed checks
 derive the expected state from the landed files: before
@@ -134,6 +153,10 @@ incomplete stages. Optional Labs 5 and 6 are outside this time box.
 Allocate 13/7/8/17 minutes to Labs 1/2/3/4. Start Lab 4's pipeline immediately
 after the initial MLV check; inspect only saved definitions and existing output
 while it runs, and query changed data after completion.
+Final story queries use the SQL analytics endpoint only after its objects
+are visible and time permits; do not add them to the layer implementations
+or start extra Spark for inspection. Keep actual fixed-check evidence if
+endpoint synchronization is pending; do not rebuild tables or views.
 
 ### Prompts and decision moments
 
@@ -159,8 +182,9 @@ participant. It never continues on its own to the next step or layer.
 | 11 | 4 | Final acceptance | Every stage's result and C002/C003/C007 history | Accept, or label recovery |
 
 - Setup approval authorizes only the setup write set, never transformations.
-  Code approval authorizes one run of that notebook: save the approved cells
-  between its fixed baseline and check cells, confirm that no job is running,
+  Code approval authorizes one run of that notebook: replace its implementation
+  placeholder with the approved cells, keeping all fixed cells unchanged
+  (MLV has no baseline cell), confirm that no job is running,
   trigger only that notebook, monitor it to completion and show the actual
   check output. If notebook submission is unsupported, hand over the cells for
   a manual **Run all** instead; never use both paths.
@@ -262,8 +286,9 @@ in place. The recovery plan is the explicit stage recovery in
 [repair and recovery](../labs/bootcamp/recovery.md), or a fresh empty
 workspace. Never delete or reset another layer's tables to make a rerun pass.
 
-Every write has a stable business key and a stated rerun behavior, so that a
-rerun with no new input changes nothing:
+Every write has a stable business key and a stated rerun behavior. With no
+new input, Bronze, Silver and Gold table writes commit nothing; MLV definitions
+are replaced and have no unchanged-Delta-version guarantee:
 
 | Table | Write pattern | Stable key | Rerun with no new input |
 |---|---|---|---|

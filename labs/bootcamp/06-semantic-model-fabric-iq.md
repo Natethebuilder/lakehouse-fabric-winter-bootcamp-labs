@@ -6,6 +6,12 @@ MLV checks, including the change batch. No report is required.
 AI proposes a model and measures from the business goal and actual Gold
 schema. You approve the design before creation, then query the real model.
 
+**Story connection:** the lakehouse is already complete. A semantic model
+adds named business calculations and relationships so you can ask questions
+without writing every query yourself. Fabric IQ queries that model; it does
+not rebuild the lakehouse. A customer breakdown must still place O1003 in
+Utrecht / Plus, not Chloe's current Amsterdam / Premium profile.
+
 ## 1. Confirm access and tools
 
 Confirm your identity, assigned workspace and `lh_bootcamp`. Gold remains
@@ -22,6 +28,8 @@ querying. Fabric IQ cannot author a model. Prefer connected
 `powerbi-modeling-mcp` for authoring; otherwise follow the authoring skill's
 complete TMDL/Fabric REST route. Do not mix live MCP edits with stale local
 TMDL. Load the skill's modeling and Direct Lake guidelines before building.
+Check that both skills and their required connections are available before
+starting; installing a skill alone does not connect an endpoint.
 
 For GitHub Copilot CLI, follow Microsoft's
 [Fabric IQ MCP setup](https://learn.microsoft.com/en-us/fabric/iq/connectors/fabric-iq-mcp).

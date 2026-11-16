@@ -5,6 +5,15 @@ approval (decision 1). Start from the assigned empty workspace; its dedicated F2
 is already assigned and Active. Do not perform these writes during pre-work.
 Setup and cold Spark startup count inside Lab 1's 13-minute slot.
 
+**Reference for Copilot and troubleshooting, not another exercise.** In the
+normal path you paste the Lab 1 setup prompt and approve its exact scope;
+Copilot performs steps 2-4 and reports the checkpoint. Do not run these
+commands yourself while it is doing the same work. Use a manual fallback
+only after agreeing which path is in use and confirming no job is running.
+A *shell* is a notebook with its lakehouse connection, fixed checks and an
+empty implementation slot. Setup success means those items exist, not that
+Bronze data has been loaded. Return to the separate Bronze prompt afterward.
+
 ## 1. Discover, plan and approve
 
 Use `spark-cli` and the signed-in CLI identity (`az account show`). Discover
@@ -130,9 +139,10 @@ locally. No data tables or transformations have run; no warm session is required
 
 Generate and approve one notebook at a time using the per-layer prompts in
 Labs 1-4; Copilot stops at each decision moment. Replace only its
-implementation placeholder with the approved `%%sql` cells, between the fixed
-baseline and check cells, preserving the description, validator and fixed
-cells. Save the notebook before submitting that individual notebook, or
+implementation placeholder with the approved `%%sql` cells, after the fixed
+validator and baseline (where present) and before the final check. MLV has
+no baseline cell. Preserve the description and all fixed cells.
+Save the notebook before submitting that individual notebook, or
 run its cells manually. Keep actual job IDs and check output. Never execute
 the full pipeline while later shells are unimplemented.
 

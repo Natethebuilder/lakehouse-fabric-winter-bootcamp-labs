@@ -10,23 +10,23 @@
 own workspace name. While your job runs, review the generated cells and wait;
 do not launch another run. Your own PASS, not the instructor's, unlocks Lab 2.
 
-**Story:** keep Chloe (`C003`)'s original Utrecht / Plus row and order
-`O1003` as received. Her later move to Amsterdam / Premium must not rewrite it.
+**Story now:** keep Chloe (`C003`)'s original Utrecht / Plus row and October
+order `O1003` as received. Her Amsterdam / Premium change is still only a
+local file; do not upload it until Lab 4.
 
 Start Copilot from the repo root with your assigned **empty workspace** on its
 dedicated active F2 capacity. No lakehouse, uploaded files, notebooks or warm
 Spark session are required yet. This slot includes [setup](setup.md), cold
 startup and the generated Bronze ingestion.
 
-Every layer has its own short prompt. Each states its outcome the way Microsoft
-recommends for [data engineering
-agents](https://learn.microsoft.com/en-us/fabric/data-engineering/data-engineering-agent-best-practices):
-goal, what to read, what to generate, what to create, how to validate and what
-to preserve. At each **decision** Copilot stops and
-waits for you; reply `approve`, `change: <what>` or `stop`. The rules live in
-the [spec](../../specs/bootcamp-lakehouse.spec.md) (section 1 lists all eleven
-decisions) and the [Copilot guardrails](../../.github/copilot-instructions.md),
-so the prompts stay short.
+**Your actions:** paste setup → review and approve → wait for the setup
+checkpoint → paste Bronze → review and approve → wait for your Bronze PASS.
+Paste the `text` blocks into **Copilot**, not PowerShell or a Fabric cell.
+Use the same conversation for all four labs. Copilot reads the
+[spec](../../specs/bootcamp-lakehouse.spec.md), writes the plan/tasks and
+stops for your decision; you do not need to memorize its eleven checkpoints.
+See [how to work with Copilot](pre-work.md#how-you-and-copilot-work-together)
+if this is new to you.
 
 ## 1. Set up the lakehouse
 
@@ -55,6 +55,8 @@ Copilot creates the lakehouse with `creationPayload.enableSchemas=true`,
 uploads the five initial CSVs, deploys the bound shells with
 `prepare-artifacts.py shells`, wires the pipeline with
 `prepare-artifacts.py pipeline` and stops at the setup checkpoint.
+The four notebooks contain checks and a placeholder, not finished
+transformations. Do not click **Run all** yet.
 
 ## 2. Generate and run Bronze
 
@@ -70,8 +72,9 @@ Preserve the CSVs and the other notebooks.
 Show the plan, cells and exact write set. Stop for my code approval.
 ```
 
-**Decision 2 · approve the Bronze code.** Review Copilot's proposed cells
-against this checklist. The notebook still contains its placeholder until
+**Decision 2 · approve the Bronze code.** First ask: “Does this keep the
+source unchanged, write only Bronze and check the result?” Review Copilot's
+proposed cells against this checklist. The notebook still contains its placeholder until
 you approve; Copilot saves the new cells only after approval:
 
 - Native Spark SQL: each cell starts with `%%sql` and a
@@ -105,6 +108,8 @@ read Delta history and assert exact values; they never change. The baseline
 cell records whether Bronze is already current, and the final check validates
 Bronze and, if you run the notebook again, proves the generated cells
 committed nothing:
+
+These calls are already in the shell; do not paste them as additional cells.
 
 ```python
 bootcamp_begin(spark, "bronze")       # fixed baseline cell, before the generated cells

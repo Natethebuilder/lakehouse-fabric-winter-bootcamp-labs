@@ -49,8 +49,9 @@ Keep the fixed validator, baseline and check cells unchanged.
 Write pattern: create each Bronze table once; merge Silver and Gold on stable
 keys and retain expired customer versions; replace the two views; keep
 schemas locked and stop on a schema mismatch.
-Reruns: with no new input a rerun changes nothing; advance CDF watermarks only
-after target writes; run the pipeline once after landing the change file.
+Reruns: with no new input Bronze, Silver and Gold commit nothing; MLV
+definitions are replaced. Advance CDF watermarks only after target writes;
+run the pipeline once after landing the change file.
 Validate source counts, SCD2 state, dimension keys, fact grain and revenue,
 watermarks, replay, and MLV totals and lineage, using only each stage's fixed
 checks, even among unused definitions. Report row counts per table and
@@ -62,10 +63,17 @@ workspace, capacity or permission. Add no data-quality quarantine. Do not rely
 on shared session state or promise session reuse.
 Confirm the plan and exact write set before execution; stop on a CDF
 retention gap or unsupported MLV feature.
+Keep the spec's decision moments: ask for the customer-key choice, stop for
+each layer's code approval, and wait for my go before landing the change file
+and running the pipeline. Continue within this same task after each approval.
 ```
 
-Approve the plan and write set, then let the same task execute. Keep the
-task ID for follow-up; inspect its status rather than submitting duplicates.
+One task does not mean unrestricted execution. Review the plan, choose the
+key and approve each layer separately. The initial four checks must pass
+before the change-file `go`. If the connected executor cannot pause at those
+boundaries, stop and report that limitation rather than waive approval.
+Keep the task ID for follow-up; inspect its status rather than submitting
+duplicates.
 
 **Capacity and cost.** Osmos consumes LLM tokens as well as Spark compute, so
 start with this one bounded task in one workspace and run it alone. Measure

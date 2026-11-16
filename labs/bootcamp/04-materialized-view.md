@@ -11,12 +11,22 @@ run MLV once. As soon as it passes, make decision 10 and launch your pipeline.
 Aim to launch by session minute 47; this is a pacing target, not a runtime
 guarantee. If a prerequisite failed, stop and get help instead of skipping it.
 
-## Close the story
+## Two steps, two different states
 
-After the batch, Chloe's current profile is Amsterdam / Premium, but `O1003`
-(11 October) remains linked to her Utrecht / Plus version. C007 has joined;
-C002 has no current row, but its history remains. This answers the opening
-question without changing the historical sale.
+First create the materialized lake views (MLVs): query results that Fabric
+stores and manages. At this first check Chloe is **still Utrecht / Plus**.
+Then approve the November file and pipeline. Only after that run should the
+results be:
+
+| Question | Before the batch | After the batch |
+|---|---|---|
+| Who is Chloe now? | Utrecht / Plus | Amsterdam / Premium |
+| Which version belongs to O1003 (11 October)? | Utrecht / Plus | Utrecht / Plus |
+| Customer-history rows / current customers | 6 / 6 | 8 / 6 |
+| Sales lines / units / net sales | 9 / 16 / 516.73 | 9 / 16 / 516.73 |
+
+C007 joins; C002 loses its current row but keeps its history. The story is
+about preserving the right customer version, not changing the sales total.
 
 Open `nb_bootcamp_mlv`. Its description, validator and fixed check cell are
 already present. The goal is two real Fabric materialized lake views over
@@ -25,7 +35,7 @@ file arrives and one pipeline run carries it through every layer.
 
 ## 1. Generate and run the materialized lake views
 
-Paste:
+Paste into the same **Copilot conversation**:
 
 ```text
 Use the spark-cli skill.
@@ -40,7 +50,9 @@ Explain how materialized lake view refresh differs from explicit CDF.
 Show the cells and the exact write set. Stop for my code approval.
 ```
 
-**Decision 9 · approve the MLV code.** Check that each generated cell is
+**Decision 9 · approve the MLV code.** Ask: “Are these two real materialized
+views over Silver, with checks that fail rather than hide bad rows?”
+Check that each generated cell is
 `%%sql` with a `-- Stage: mlv - …` header and that it reads only `silver` and
 defines `gold.sales_daily` and `gold.customer_current` with
 `CREATE OR REPLACE MATERIALIZED LAKE VIEW` (not tables or ordinary views),
@@ -48,7 +60,8 @@ with the exact grouping, columns and `ON MISMATCH FAIL` constraints. Reply
 `change: <what>` or `approve` to save and run it once. The definitions are
 recreated on rerun and their exact schema is still checked; this is not
 evidence of incremental refresh or unchanged Delta versions. MLV has no
-baseline/rerun cell. Its fixed contract check runs after your generated cells:
+baseline/rerun cell. This call is already in the shell after your generated
+cells; do not add another copy:
 
 ```python
 validate_bootcamp(spark, "mlv")       # fixed check cell, after the generated cells
@@ -58,6 +71,8 @@ It reconciles **every group and value** of `gold.sales_daily` and every row
 of `gold.customer_current` to Silver, and confirms both definitions with
 `SHOW CREATE MATERIALIZED LAKE VIEW`. Inspect the `ON MISMATCH FAIL`
 constraints. Once the initial check passes, start the next step immediately.
+The MLV notebook reads Silver directly; it does not read Gold's star tables,
+even though the views are stored in the `gold` schema.
 
 ## 2. Land the change batch and run the pipeline
 
@@ -70,7 +85,7 @@ Files/bootcamp/changes/ in lh_bootcamp is empty.
 Stop for my go/no-go.
 On go, upload data/bootcamp/changes/customer_changes.csv there, verify its
 bytes and trigger pl_bootcamp_build once.
-Validate by reporting each notebook's status.
+Validate each notebook's actual status and fixed-check output.
 Preserve every notebook: edit none.
 ```
 
@@ -95,8 +110,41 @@ dependency graph only. Do not start interactive Spark queries or another job.
 ## 3. Inspect the completed build
 
 After the pipeline completes, open **Manage materialized lake views** to show
-lineage. Report refresh strategy only when Fabric exposes it. Query the views
-and customer history:
+lineage. Report refresh strategy only when Fabric exposes it. For the live
+finish, use the saved fixed-check output and the table above. Do not start a
+new Spark session just to run extra queries.
+
+**Read-only story inspection:** after jobs finish, with no other workload
+and time remaining, use the lakehouse **SQL analytics endpoint** if these
+Gold objects are visible there. If synchronization is pending, retain the
+fixed-check evidence and inspect later; do not rebuild anything. These are
+inspection queries, not implementation cells to add to the four notebooks.
+They do not replace the fixed checks.
+
+**Who is Chloe now?**
+
+```sql
+SELECT customer_id, city, loyalty_tier
+FROM gold.customer_current
+WHERE customer_id = 'C003';
+```
+
+**Who was she when O1003 happened?**
+
+```sql
+SELECT DISTINCT f.order_id, d.date AS order_date,
+       c.city AS city_at_purchase, c.loyalty_tier AS rewards_at_purchase
+FROM gold.fact_sales f
+JOIN gold.dim_date d ON d.date_key = f.date_key
+JOIN gold.dim_customer c ON c.customer_sk = f.customer_sk
+WHERE f.order_id = 'O1003';
+```
+
+Expect Amsterdam / Premium for the current profile and 11 October 2026,
+Utrecht / Plus for the sale. `DISTINCT` shows one order-level answer here;
+it does not change the stored one-row-per-order-line fact grain.
+
+For more detail, inspect daily sales and all three customer changes:
 
 ```sql
 SELECT date_key, store_id, channel, sales_lines, units, net_amount
@@ -111,7 +159,9 @@ WHERE customer_id IN ('C002', 'C003', 'C007')
 ORDER BY customer_id, valid_from;
 ```
 
-Explain why C003's October sales still use its original version.
+If Silver is not exposed in your SQL analytics endpoint, use the fixed
+history-check output instead. Explain why C003's October sales still use
+its original version.
 
 For pipeline child output, open the child notebook run in Fabric Monitor.
 Do not assume the manual notebook-job exit-value endpoint exposes pipeline

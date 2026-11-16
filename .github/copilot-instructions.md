@@ -19,8 +19,9 @@ transformations. If a business rule or target is unclear, stop and ask.
 Each layer has its own short prompt. Stop at every decision moment in
 section 1 of the spec, end with the reply options, and never continue to the
 next step or layer on your own. Setup approval authorizes only the setup
-writes. Code approval authorizes one run: save the approved cells between the
-fixed baseline and check cells, confirm no job is running, trigger only that
+writes. Code approval authorizes one run: replace the implementation placeholder
+with the approved cells, keeping all fixed cells unchanged (MLV has no baseline
+cell); confirm no job is running, trigger only that
 notebook, monitor it and show the actual check output. If submission is
 unsupported, hand over the cells for a manual **Run all**; never both. Land
 the change file and run the pipeline only after Lab 4's `go`.

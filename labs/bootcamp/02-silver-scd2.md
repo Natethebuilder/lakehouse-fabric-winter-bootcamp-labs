@@ -12,10 +12,14 @@ own PASS before Gold; do not copy another participant's keys or results.
 
 ## The story behind the code
 
-The starting snapshot says Chloe (`C003`) lives in Utrecht and has Plus
-loyalty; her order `O1003` is dated 11 October. On 2 November, the update opens
-an Amsterdam / Premium version. Silver closes the old version at the change date
-and keeps it; it does not overwrite history.
+**Story now:** Chloe (`C003`) is Utrecht / Plus; her order `O1003` is dated
+11 October. This run creates six current customer versions, including hers.
+**Later, in Lab 4,** the November file will make the same code close her
+Utrecht version and open Amsterdam / Premium without erasing the old one.
+
+Keeping dated versions is **SCD2**. CDF tells Silver which Bronze rows
+changed; a watermark is its saved processing bookmark. Build that handling
+now; do not expect two Chloe rows yet.
 
 Open `nb_bootcamp_silver`. It has its own description, validator, fixed
 baseline cell and fixed check cell; session variables and temporary views do
@@ -23,7 +27,7 @@ not carry over from Bronze, so the generated cells declare what they need.
 
 ## 1. Choose the key, generate and run
 
-Paste:
+Paste into the same **Copilot conversation**:
 
 ```text
 Use the spark-cli skill.
@@ -39,15 +43,18 @@ Explain the close/open of C003's Utrecht history.
 Show the cells and exact write set. Stop for my code approval.
 ```
 
-**Decision 4 · choose the customer key.** Both options satisfy the contract
-(a unique, non-null BIGINT); Gold copies the key unchanged. Reply `A` or `B`:
+**Decision 4 · choose the customer key.** `customer_id` identifies Chloe;
+`customer_sk` identifies one dated version of Chloe. Both options satisfy the
+contract (a unique, non-null BIGINT); Gold copies the key unchanged. Ask
+Copilot to explain the trade-off before replying `A` or `B`:
 
 - **A:** `xxhash64(customer_id, valid_from)`: deterministic, so a rebuild
   reproduces the same keys.
 - **B:** the current maximum `customer_sk` plus `row_number()`: a compact
   sequence whose values depend on processing order.
 
-**Decision 5 · approve the Silver code.** Check:
+**Decision 5 · approve the Silver code.** Ask: “Does this preserve the old
+version and move the bookmark only after saving the result?” Check:
 
 - Each generated cell is `%%sql` with a `-- Stage: silver - …` header.
 - It reads only Bronze through `table_changes()` from each watermark + 1,
@@ -68,7 +75,8 @@ runs this notebook once, or gives you the cells to run manually.
 
 ## 2. Verify and explain
 
-The shell's fixed baseline and check cells wrap your generated cells:
+These calls already wrap your generated cells in the shell; do not paste
+them as additional cells:
 
 ```python
 bootcamp_begin(spark, "silver")       # fixed baseline cell, before the generated cells

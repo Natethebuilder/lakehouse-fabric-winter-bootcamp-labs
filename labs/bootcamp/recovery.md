@@ -3,7 +3,8 @@
 Keep the fixed specification and checks. A failed stage is a debugging
 exercise, not permission to change expected values or reset history. This page
 is also the recovery plan for iterating in place: `lh_bootcamp` is an isolated
-staging lakehouse rebuilt from immutable CSVs, with no clone-and-promote step.
+staging lakehouse built from immutable CSVs, with no clone-and-promote step.
+Repair resumes the existing state; it is not permission to rebuild or reset it.
 
 ## Recover setup safely
 

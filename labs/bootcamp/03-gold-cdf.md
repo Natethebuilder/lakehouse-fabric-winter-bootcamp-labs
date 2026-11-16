@@ -12,9 +12,10 @@ CDF bounds as evidence; matching totals alone do not prove incremental processin
 
 ## The story behind the code
 
-Chloe (`C003`)'s order `O1003` is dated 11 October, before her 2 November move.
-Gold links that sale to her Utrecht / Plus version, even though Amsterdam /
-Premium is now current. The SQL uses the order timestamp to choose the matching version:
+**Story now:** Chloe (`C003`) is still Utrecht / Plus. Gold links October
+order `O1003` to that version. **Later, in Lab 4,** Amsterdam / Premium will
+become current, but this sale must keep its original customer key.
+The time-range join makes that choice:
 
 ```sql
 o.order_ts >= c.valid_from AND o.order_ts < c.valid_to
@@ -23,13 +24,17 @@ o.order_ts >= c.valid_from AND o.order_ts < c.valid_to
 In plain language: use the customer row whose effective dates include the
 order date.
 
+The **grain** is one order line, not one customer. The star schema combines
+sales facts (what was sold) with dimensions (customer, product, store and
+date). This is how the business story becomes a reportable answer.
+
 Open `nb_bootcamp_gold`. It reads only Silver; session variables and
 temporary views do not carry over from other notebooks, so the generated
 cells declare what they need. Keep the fixed cells unchanged.
 
 ## 1. Generate and run
 
-Paste:
+Paste into the same **Copilot conversation**:
 
 ```text
 Use the spark-cli skill.
@@ -44,7 +49,8 @@ Explain why O1003 links to Utrecht / Plus. Show cells and write set.
 Stop for my code approval.
 ```
 
-**Decision 7 · approve the Gold code.** Check:
+**Decision 7 · approve the Gold code.** Ask: “Does each sales line use the
+customer version valid at purchase, rather than today's profile?” Check:
 
 - Each generated cell is `%%sql` with a `-- Stage: gold - …` header.
 - It uses Silver `table_changes()` from each watermark + 1 to identify
@@ -58,7 +64,8 @@ Stop for my code approval.
   there is no `mergeSchema` or schema auto-merge.
 - `fact_sales` recomputes only the touched orders, joins the customer version
   valid at `order_ts` and removes deleted lines with
-  `WHEN NOT MATCHED BY SOURCE`.
+  `WHEN NOT MATCHED BY SOURCE` restricted to those touched orders; it must
+  not delete unrelated facts.
 - Each watermark advances only after its target write.
 
 Reply `change: <what>` or `approve`: as in Lab 1, approval saves the cells and
@@ -66,7 +73,8 @@ runs this notebook once, or gives you the cells to run manually.
 
 ## 2. Verify
 
-The shell's fixed baseline and check cells wrap your generated cells:
+These calls already wrap your generated cells in the shell; do not paste
+them as additional cells:
 
 ```python
 bootcamp_begin(spark, "gold")         # fixed baseline cell, before the generated cells
