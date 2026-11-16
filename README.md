@@ -10,7 +10,7 @@ Start from an **empty workspace with a dedicated active F2**.
 On 11 October, Chloe (`C003`) places order `O1003`: Utrecht / Plus rewards.
 On 2 November, she moves: Amsterdam / Premium rewards. The report shows her
 current profile, but October's sale stays linked to Utrecht / Plus.
-Customer reward levels are **Standard, Plus and Premium**, not lakehouse layers.
+Customer reward levels are **Standard, Plus and Premium**.
 
 **Lab goal:** build a lakehouse that preserves the source and customer
 history, matches each sale to the version valid on its date, and serves checked
