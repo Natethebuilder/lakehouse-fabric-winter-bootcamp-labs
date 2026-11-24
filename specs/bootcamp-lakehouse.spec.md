@@ -52,7 +52,7 @@ AI proposes the architecture and implementation from this business goal and
 the fixed contracts below. The participant approves layer boundaries, table
 flow, history policy, serving choices and each write set before execution.
 Use short plans and numbered tasks under `specs/plans/`, as described in the
-[guardrails](../.github/copilot-instructions.md).
+guardrails in `.github/copilot-instructions.md`.
 
 For participants new to agentic development, start with the
 [pre-work orientation and glossary](../labs/bootcamp/pre-work.md#how-you-and-copilot-work-together).
@@ -66,8 +66,9 @@ existing resources and job state, not rerunning setup.
 
 Pre-work is tools, repository clone, sign-in and read-only access checks only.
 Each participant receives an empty workspace with a dedicated capacity already
-assigned and Active. No lakehouse, staged CSVs, notebooks, pipeline or warm
-Spark session are required in advance.
+assigned and Active, as a workspace Contributor; the MicroHack dashboard lists
+the workspace and capacity. No lakehouse, staged CSVs, notebooks, pipeline or
+warm Spark session are required in advance.
 
 The Lab 1 setup prompt confirms identity, workspace and capacity, shows the
 setup write set and waits for approval. Use Fabric skills and CLI to create
@@ -255,8 +256,10 @@ algorithm for multiple business events between watermarks.
 - After setup approval, the setup prompt may create `lh_bootcamp`, stage the
   five initial CSVs, create the empty `Files/bootcamp/changes/` folder and
   provision the four named shells and their serial
-  pipeline. Lab 4 may upload the change CSV. The organizer supplies the empty
-  workspace and its dedicated active capacity.
+  pipeline. Lab 4 may upload the change CSV. The organizer's lab automation
+  supplies the empty workspace, its dedicated active capacity and the
+  participant's Contributor role; capacity administration stays with the
+  organizer.
 - Create only the tables and views specified below in `bronze`, `silver`,
   `gold` and `lab_ops`. Keep OneLake files read-only after staging.
 - Layer separation: the Bronze notebook writes only `bronze`; the Silver
@@ -627,11 +630,11 @@ started. An accepted, running or unfinished job is not a PASS.
 
 ## 9. Optional labs
 
-[Project Osmos](../labs/bootcamp/05-osmos-replay.md) builds the same contracts
+Project Osmos (Lab 5, `challenges/challenge-05.md`) builds the same contracts
 in a fresh approved target. Use separate layer notebooks and the same fixed
 checks; do not overwrite a completed live build.
 
-[Semantic model and Fabric IQ](../labs/bootcamp/06-semantic-model-fabric-iq.md)
+Semantic model and Fabric IQ (Lab 6, `challenges/challenge-06.md`)
 uses existing Gold read-only. AI proposes a model and measures from the
 business goal and actual schema; the participant approves before creation.
 Only that semantic-model item may be created; no report is required.

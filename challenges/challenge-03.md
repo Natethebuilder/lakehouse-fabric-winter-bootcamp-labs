@@ -1,6 +1,10 @@
-# Lab 3: Gold from the Silver change feed
+# Challenge 3 - Lab 3: Gold from the Silver change feed
+
+[Previous Challenge](challenge-02.md) - **[Home](../Readme.md)** - [Next Challenge](challenge-04.md)
 
 **8 minutes · session minutes 35–43.** Prerequisite: Lab 2 passes.
+
+## Goal
 
 | Goal | Start | Open | Finish signal |
 |---|---|---|---|
@@ -10,7 +14,7 @@
 review your own cells. Run Gold only after Silver passes. Keep the actual
 CDF bounds as evidence; matching totals alone do not prove incremental processing.
 
-## The story behind the code
+### The story behind the code
 
 **Story now:** Chloe (`C003`) is still Utrecht / Plus. Gold links October
 order `O1003` to that version. **Later, in Lab 4,** Amsterdam / Premium will
@@ -32,7 +36,9 @@ Open `nb_bootcamp_gold`. It reads only Silver; session variables and
 temporary views do not carry over from other notebooks, so the generated
 cells declare what they need. Keep the fixed cells unchanged.
 
-## 1. Generate and run
+## Actions
+
+### 1. Generate and run
 
 Paste into the same **Copilot conversation**:
 
@@ -71,7 +77,7 @@ customer version valid at purchase, rather than today's profile?” Check:
 Reply `change: <what>` or `approve`: as in Lab 1, approval saves the cells and
 runs this notebook once, or gives you the cells to run manually.
 
-## 2. Verify
+### 2. Verify
 
 These calls already wrap your generated cells in the shell; do not paste
 them as additional cells:
@@ -104,9 +110,11 @@ ORDER BY d.date;
 Output equality alone cannot prove the method used CDF: keep the generated
 code and the consumed version ranges (the `lab_ops.cdf_watermarks` rows) as
 evidence. Compare with the definition of done and accept by pasting the
-[Lab 4](04-materialized-view.md) prompt.
+[Lab 4](challenge-04.md) prompt.
 
-## Definition of done
+## Success criteria
+
+Definition of done:
 
 - Actual `PASS: bootcamp gold contract, initial load (fixed read-only checks)`
   and `PASS: bootcamp gold was built or brought to contract by this run`.
@@ -126,7 +134,7 @@ evidence. Compare with the definition of done and accept by pasting the
 
 On failure, reply `repair: <actual error>`, approve the patch and rerun.
 Never reset watermarks, overwrite history or relax the contract to pass; see
-[repair and recovery](recovery.md). Do not run the full pipeline until Lab 4.
+[repair and recovery](../labs/bootcamp/recovery.md). Do not run the full pipeline until Lab 4.
 
-**Next:** [Lab 4 - Materialized lake views and the change batch](04-materialized-view.md).
+**Next:** [Challenge 4 - Lab 4: Materialized lake views and the change batch](challenge-04.md).
 If Gold has not passed, repair it or watch without starting Lab 4.

@@ -1,18 +1,25 @@
-# Lab 5: Project Osmos
+# Challenge 5 - Lab 5: Project Osmos
+
+[Previous Challenge](challenge-04.md) - **[Home](../Readme.md)** - [Next Challenge](challenge-06.md)
 
 **Optional, after the session; untimed.**
+
+## Goal
 
 Ask Project Osmos to build the same lakehouse as one end-to-end task, then
 compare its actual outputs against the same fixed contracts.
 
-## 1. Prepare a fresh target
+## Actions
 
-This lab starts from the [Lab 1 setup checkpoint](setup.md#4-wire-the-serial-pipeline):
+### 1. Prepare a fresh target
+
+This lab starts from the [Lab 1 setup checkpoint](../labs/bootcamp/setup.md#4-wire-the-serial-pipeline):
 staged CSVs and empty notebook implementations, with no built tables.
 Do not overwrite your completed live build. For a separate replay, ask the
-instructor to assign a fresh empty workspace with its dedicated active capacity.
+instructor to assign a fresh empty workspace with its dedicated active capacity;
+the lab automation provisions only the workspace on your dashboard.
 Confirm the new target, then run only the
-[Lab 1 setup prompt](01-bronze.md); skip the Bronze prompt.
+[Lab 1 setup prompt](challenge-01.md); skip the Bronze prompt.
 Do not reset resources, create workspaces or change capacity yourself.
 
 Confirm identity, assigned workspace, isolated schema-enabled `lh_bootcamp`,
@@ -25,7 +32,7 @@ Verify it is installed, enabled and usable in your client. See
 [Project Osmos setup](https://github.com/microsoft/project-osmos) for
 prerequisites. Never send credentials in a prompt.
 
-## 2. Submit a bounded task
+### 2. Submit a bounded task
 
 Submit one task. It follows the
 [recommended outcome pattern](https://learn.microsoft.com/en-us/fabric/data-engineering/data-engineering-agent-best-practices):
@@ -84,7 +91,7 @@ does; that is why each participant has a dedicated F2. If a capacity is
 shared, ask your instructor about on-demand (autoscale) billing for Spark. Its
 capacity-unit limit bounds Spark compute, not LLM tokens.
 
-## 3. Check the result
+### 3. Check the result
 
 Use the unchanged fixed check cell in each stage notebook, as in Labs 1-4.
 Before the change file lands each stage prints its initial-load PASS; after
@@ -99,7 +106,9 @@ Inspect real bounded reads, version ranges, watermark ordering, MLV DDL and
 Fabric lineage. Do not infer the method from matching counts, or incremental
 MLV refresh from a successful create.
 
-## Definition of done
+## Success criteria
+
+Definition of done:
 
 - The task actually completes and every fixed stage check passes, before and
   after the change batch.
@@ -114,7 +123,7 @@ MLV refresh from a successful create.
   Osmos approached the specification. Label unsupported/incomplete work.
 
 Stop sessions started for this exercise. The
-[semantic-model lab](06-semantic-model-fabric-iq.md) is a separate optional
+[semantic-model lab](challenge-06.md) is a separate optional
 task, not part of this Osmos request.
 
-[Back to the lab overview](../../README.md).
+[Back to the lab overview](../Readme.md).

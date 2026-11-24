@@ -1,6 +1,10 @@
-# Lab 4: Materialized lake views and the change batch
+# Challenge 4 - Lab 4: Materialized lake views and the change batch
+
+[Previous Challenge](challenge-03.md) - **[Home](../Readme.md)** - [Next Challenge](challenge-05.md)
 
 **17 minutes · session minutes 43–60.** Prerequisite: Labs 1-3 pass.
+
+## Goal
 
 | Goal | Start | Open | Finish signal |
 |---|---|---|---|
@@ -11,7 +15,7 @@ run MLV once. As soon as it passes, make decision 10 and launch your pipeline.
 Aim to launch by session minute 47; this is a pacing target, not a runtime
 guarantee. If a prerequisite failed, stop and get help instead of skipping it.
 
-## Two steps, two different states
+### Two steps, two different states
 
 First create the materialized lake views (MLVs): query results that Fabric
 stores and manages. At this first check Chloe is **still Utrecht / Plus**.
@@ -33,7 +37,9 @@ already present. The goal is two real Fabric materialized lake views over
 Silver, not merely queries returning the same numbers. Then a customer change
 file arrives and one pipeline run carries it through every layer.
 
-## 1. Generate and run the materialized lake views
+## Actions
+
+### 1. Generate and run the materialized lake views
 
 Paste into the same **Copilot conversation**:
 
@@ -74,7 +80,7 @@ constraints. Once the initial check passes, start the next step immediately.
 The MLV notebook reads Silver directly; it does not read Gold's star tables,
 even though the views are stored in the `gold` schema.
 
-## 2. Land the change batch and run the pipeline
+### 2. Land the change batch and run the pipeline
 
 Paste:
 
@@ -107,7 +113,7 @@ do not assume session reuse. Start it as soon as the MLV check passes.
 While it runs, inspect saved definitions, existing output and the pipeline
 dependency graph only. Do not start interactive Spark queries or another job.
 
-## 3. Inspect the completed build
+### 3. Inspect the completed build
 
 After the pipeline completes, open **Manage materialized lake views** to show
 lineage. Report refresh strategy only when Fabric exposes it. For the live
@@ -171,7 +177,9 @@ an output-retrieval failure must not trigger another pipeline run.
 **Decision 11 · accept the result.** Compare with the definition of done, or
 label any stage that needed recovery.
 
-## Definition of done
+## Success criteria
+
+Definition of done:
 
 - Actual `PASS: bootcamp mlv contract, initial load (fixed read-only checks)`
   with both view definitions confirmed and lineage inspected; the
@@ -197,16 +205,18 @@ explicitly approve one pipeline retry; do not launch a competing notebook.
 Already-current Bronze, Silver and Gold stages must no-op. An error retrieving
 output is not a failed execution and never authorizes a retry. If materialized lake views are
 unavailable, label the stage "query checked; materialized lake view not
-created"; that is not a pass. Follow [repair and recovery](recovery.md).
+created"; that is not a pass. Follow [repair and recovery](../labs/bootcamp/recovery.md).
 
 ## Finish the live build
 
 Stop at the end of the 45-minute build, even if a stage needs labelled
-[recovery](recovery.md). Record completed stages, actual output and any
+[recovery](../labs/bootcamp/recovery.md). Record completed stages, actual output and any
 pending job ID; an unfinished job is not a PASS. Show the dependency graph and see
-[the setup execution guidance](setup.md#5-generate-approve-and-execute) for
+[the setup execution guidance](../labs/bootcamp/setup.md#5-generate-approve-and-execute) for
 later reruns. Stop only sessions/jobs you started and confirm terminal status.
 
-**Optional next steps:** [Project Osmos](05-osmos-replay.md) in a fresh
-approved target, or [semantic model and Fabric IQ](06-semantic-model-fabric-iq.md)
+**Next:** [Finish](finish.md) the live session.
+
+**Optional next steps:** [Project Osmos](challenge-05.md) in a fresh
+approved target, or [semantic model and Fabric IQ](challenge-06.md)
 over this completed Gold layer.

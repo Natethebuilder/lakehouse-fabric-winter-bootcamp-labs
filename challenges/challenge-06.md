@@ -1,7 +1,11 @@
-# Lab 6: Semantic model and Fabric IQ
+# Challenge 6 - Lab 6: Semantic model and Fabric IQ
+
+[Previous Challenge](challenge-05.md) - **[Home](../Readme.md)** - [Next Challenge](finish.md)
 
 **Optional, after the session; untimed.** Prerequisite: completed Gold and
 MLV checks, including the change batch. No report is required.
+
+## Goal
 
 AI proposes a model and measures from the business goal and actual Gold
 schema. You approve the design before creation, then query the real model.
@@ -12,7 +16,9 @@ without writing every query yourself. Fabric IQ queries that model; it does
 not rebuild the lakehouse. A customer breakdown must still place O1003 in
 Utrecht / Plus, not Chloe's current Amsterdam / Premium profile.
 
-## 1. Confirm access and tools
+## Actions
+
+### 1. Confirm access and tools
 
 Confirm your identity, assigned workspace and `lh_bootcamp`. Gold remains
 read-only; only the approved semantic-model item may be created.
@@ -20,7 +26,10 @@ read-only; only the approved semantic-model item may be created.
 Check Power BI authoring licensing for your workspace (normally Pro/PPU),
 workspace access, Direct Lake availability and the model-authoring endpoint.
 An F2 capacity or GitHub Copilot subscription does not grant Power BI
-authoring rights. If blocked, retain the design and mark creation incomplete;
+authoring rights. At a hosted MicroHack your lab account normally has a
+Microsoft 365 E5 license, which includes Power BI Pro; your dashboard's
+**Fabric workspace role** (Contributor) lets you create the model item.
+If blocked, retain the design and mark creation incomplete;
 do not change capacity, permissions or workspaces.
 
 Use `semantic-model-authoring` for creation and `fabriciq` for read-only
@@ -45,7 +54,7 @@ organization-approved integration, required licensing and successful model
 discovery/query in that client. A license alone is not a Fabric IQ connector.
 Otherwise use the GitHub Copilot CLI path.
 
-## 2. Approve an AI-proposed model
+### 2. Approve an AI-proposed model
 
 ```text
 Use semantic-model-authoring in my confirmed workspace. Inspect only
@@ -72,7 +81,7 @@ item, refresh/frame it, inspect relationships and test every measure. Stop
 on duplicate names or credential errors; do not delete/redeploy blindly.
 Keep actual completion output. Never store tokens in model files.
 
-## 3. Query through Fabric IQ
+### 3. Query through Fabric IQ
 
 ```text
 Use fabriciq to discover my model by its actual name. Resolve ambiguity
@@ -89,7 +98,9 @@ Inspect actual query output. Multirow DAX queries use `ORDER BY`; each query
 has one `EVALUATE`. Do not bypass model security or assume columns from this
 guide without schema discovery.
 
-## Definition of done
+## Success criteria
+
+Definition of done:
 
 - The approved model exists, refresh succeeds and relationships match its
   intended grain.
@@ -101,8 +112,10 @@ guide without schema discovery.
 - Retain the approved definitions, actual Fabric IQ output and comparison
   results. A plausible natural-language answer alone is not proof.
 
-References: [Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview),
-[licensing](https://learn.microsoft.com/en-us/fabric/enterprise/licenses),
-[Fabric IQ capabilities](https://learn.microsoft.com/en-us/fabric/iq/connectors/fabric-iq-mcp).
+## Learning resources
 
-[Back to the lab overview](../../README.md).
+- [Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)
+- [Licensing](https://learn.microsoft.com/en-us/fabric/enterprise/licenses)
+- [Fabric IQ capabilities](https://learn.microsoft.com/en-us/fabric/iq/connectors/fabric-iq-mcp)
+
+[Back to the lab overview](../Readme.md).
