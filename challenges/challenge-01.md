@@ -1,6 +1,10 @@
-# Lab 1: create the lakehouse and Bronze
+# Challenge 1 - Lab 1: create the lakehouse and Bronze
 
-**13 minutes · session minutes 15–28.** Prerequisite: the [pre-work ready check](pre-work.md#ready-check).
+**[Home](../Readme.md)** - [Next Challenge](challenge-02.md)
+
+**13 minutes · session minutes 15–28.** Prerequisite: the [pre-work ready check](../labs/bootcamp/pre-work.md#ready-check).
+
+## Goal
 
 | Goal | Start | Open | Finish signal |
 |---|---|---|---|
@@ -15,22 +19,27 @@ order `O1003` as received. Her Amsterdam / Premium change is still only a
 local file; do not upload it until Lab 4.
 
 Start Copilot from the repo root with your assigned **empty workspace** on its
-dedicated active F2 capacity. No lakehouse, uploaded files, notebooks or warm
-Spark session are required yet. This slot includes [setup](setup.md), cold
-startup and the generated Bronze ingestion.
+dedicated active F2 capacity. Your MicroHack dashboard lists them as
+**Fabric workspace** and **Fabric capacity**. No lakehouse, uploaded files,
+notebooks or warm Spark session are required yet. This slot includes
+[setup](../labs/bootcamp/setup.md), cold startup and the generated Bronze
+ingestion.
+
+## Actions
 
 **Your actions:** paste setup → review and approve → wait for the setup
 checkpoint → paste Bronze → review and approve → wait for your Bronze PASS.
 Paste the `text` blocks into **Copilot**, not PowerShell or a Fabric cell.
 Use the same conversation for all four labs. Copilot reads the
-[spec](../../specs/bootcamp-lakehouse.spec.md), writes the plan/tasks and
+[spec](../specs/bootcamp-lakehouse.spec.md), writes the plan/tasks and
 stops for your decision; you do not need to memorize its eleven checkpoints.
-See [how to work with Copilot](pre-work.md#how-you-and-copilot-work-together)
+See [how to work with Copilot](../labs/bootcamp/pre-work.md#how-you-and-copilot-work-together)
 if this is new to you.
 
-## 1. Set up the lakehouse
+### 1. Set up the lakehouse
 
-Replace the workspace placeholder and paste:
+Replace the workspace placeholder with the **Fabric workspace** name from your
+dashboard and paste:
 
 ```text
 Use the spark-cli skill.
@@ -46,10 +55,11 @@ Do not generate Bronze code yet.
 ```
 
 **Decision 1 · setup go/no-go.** Check that the identity, workspace and
-capacity are yours, the workspace is empty, and the write set is exactly one
-schema-enabled `lh_bootcamp`, five uploads, an empty `changes/` folder, four
-empty notebooks and their pipeline, in your assigned workspace only. Then
-reply `approve`. Setup approval does not authorize running transformations.
+capacity are yours and match your dashboard, the workspace is empty, and the
+write set is exactly one schema-enabled `lh_bootcamp`, five uploads, an empty
+`changes/` folder, four empty notebooks and their pipeline, in your assigned
+workspace only. Then reply `approve`. Setup approval does not authorize
+running transformations.
 
 Copilot creates the lakehouse with `creationPayload.enableSchemas=true`,
 uploads the five initial CSVs, deploys the bound shells with
@@ -58,7 +68,7 @@ uploads the five initial CSVs, deploys the bound shells with
 The four notebooks contain checks and a placeholder, not finished
 transformations. Do not click **Run all** yet.
 
-## 2. Generate and run Bronze
+### 2. Generate and run Bronze
 
 ```text
 Use the spark-cli skill.
@@ -101,7 +111,7 @@ paste them in place of the placeholder, between the fixed baseline cell and
 the final check, and run all cells in order. Do not execute both paths. Keep
 code and output.
 
-## 3. Verify
+### 3. Verify
 
 The shell's fixed validator, baseline and check cells are Python because they
 read Delta history and assert exact values; they never change. The baseline
@@ -118,11 +128,13 @@ validate_bootcamp(spark, "bronze")    # fixed check cell, after the generated ce
 ```
 
 **Decision 3 · accept the result.** Compare the output with the definition of
-done below. Accept by pasting the [Lab 2](02-silver-scd2.md) prompt; otherwise
+done below. Accept by pasting the [Lab 2](challenge-02.md) prompt; otherwise
 follow the failure notes. If time remains, an optional second **Run all** in
 the warm session shows the rerun proof.
 
-## Definition of done
+## Success criteria
+
+Definition of done:
 
 - Schema-enabled `lh_bootcamp`, five verified uploads, the empty `changes/`
   folder, four correctly bound shells with fixed checks and an unscheduled
@@ -152,8 +164,8 @@ same reply works in every lab. Get the actual notebook exception from the run
 snapshot in Fabric Monitor; a generic job failure is not enough to diagnose
 it. `Failed to decode multipart name` means a MERGE reads a temporary view
 over a Delta table; the fix is to write that source inline in `USING (...)`.
-Follow [repair and recovery](recovery.md), without weakening the checks.
+Follow [repair and recovery](../labs/bootcamp/recovery.md), without weakening the checks.
 
-**Next:** [Lab 2 - Silver and SCD2](02-silver-scd2.md).
+**Next:** [Challenge 2 - Lab 2: Silver and SCD2](challenge-02.md).
 Continue only after your PASS. If blocked, keep your error and follow the
 walkthrough without running downstream layers.

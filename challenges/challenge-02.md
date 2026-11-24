@@ -1,6 +1,10 @@
-# Lab 2: Silver from the Bronze change feed
+# Challenge 2 - Lab 2: Silver from the Bronze change feed
+
+[Previous Challenge](challenge-01.md) - **[Home](../Readme.md)** - [Next Challenge](challenge-03.md)
 
 **7 minutes · session minutes 28–35.** Prerequisite: Lab 1 passes.
+
+## Goal
 
 | Goal | Start | Open | Finish signal |
 |---|---|---|---|
@@ -10,7 +14,7 @@
 Choose your strategy, approve your cells and run only Silver. Wait for your
 own PASS before Gold; do not copy another participant's keys or results.
 
-## The story behind the code
+### The story behind the code
 
 **Story now:** Chloe (`C003`) is Utrecht / Plus; her order `O1003` is dated
 11 October. This run creates six current customer versions, including hers.
@@ -25,7 +29,9 @@ Open `nb_bootcamp_silver`. It has its own description, validator, fixed
 baseline cell and fixed check cell; session variables and temporary views do
 not carry over from Bronze, so the generated cells declare what they need.
 
-## 1. Choose the key, generate and run
+## Actions
+
+### 1. Choose the key, generate and run
 
 Paste into the same **Copilot conversation**:
 
@@ -73,7 +79,7 @@ version and move the bookmark only after saving the result?” Check:
 Reply `change: <what>` or `approve`: as in Lab 1, approval saves the cells and
 runs this notebook once, or gives you the cells to run manually.
 
-## 2. Verify and explain
+### 2. Verify and explain
 
 These calls already wrap your generated cells in the shell; do not paste
 them as additional cells:
@@ -104,9 +110,11 @@ ORDER BY customer_id, valid_from;
 Explain why an attribute change closes a version instead of overwriting it,
 and why facts will join on a surrogate key valid at the order timestamp.
 Compare with the definition of done and accept by pasting the
-[Lab 3](03-gold-cdf.md) prompt.
+[Lab 3](challenge-03.md) prompt.
 
-## Definition of done
+## Success criteria
+
+Definition of done:
 
 - Actual `PASS: bootcamp silver contract, initial load (fixed read-only checks)`
   and `PASS: bootcamp silver was built or brought to contract by this run`.
@@ -125,7 +133,7 @@ Compare with the definition of done and accept by pasting the
 
 On failure, reply `repair: <actual error>`, approve the patch to the generated
 code and rerun the notebook. Never recreate history, reset watermarks or
-change expected results; see [repair and recovery](recovery.md).
+change expected results; see [repair and recovery](../labs/bootcamp/recovery.md).
 
-**Next:** [Lab 3 - Gold from the Silver change feed](03-gold-cdf.md).
+**Next:** [Challenge 3 - Lab 3: Gold from the Silver change feed](challenge-03.md).
 If Silver has not passed, repair it or watch without running Gold.

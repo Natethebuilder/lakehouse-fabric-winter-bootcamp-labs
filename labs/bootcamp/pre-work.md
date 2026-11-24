@@ -2,6 +2,8 @@
 
 Prepare tools and access before the session. Begin the live build with an
 **empty workspace** and a dedicated active F2 capacity already assigned.
+At a hosted MicroHack the lab automation provides both, and your dashboard
+lists them as **Fabric workspace** and **Fabric capacity**.
 Lab 1 creates the lakehouse, stages the five initial CSVs and provisions
 shells/pipeline; setup and cold Spark startup count inside the 45-minute build.
 
@@ -43,17 +45,18 @@ You need:
 
 - Git, Python 3.10+ and Azure CLI.
 - GitHub Copilot CLI with an active Copilot account.
-- Your assigned empty Fabric workspace, permission to create the lakehouse,
-  notebooks and pipeline, and its dedicated active F2 capacity with
-  Materialized Lake View support.
+- Your assigned empty Fabric workspace and its dedicated active F2 capacity
+  with Materialized Lake View support. Your **Fabric workspace role**
+  (Contributor) permits creating the lakehouse, notebooks and pipeline;
+  organizers administer the capacity.
 - The public [Skills for Fabric](https://github.com/microsoft/skills-for-fabric)
   bundle, including `spark-cli`.
 
 From PowerShell:
 
 ```powershell
-git clone https://github.com/anezami/fabric-winter-bootcamp-labs.git
-cd fabric-winter-bootcamp-labs
+git clone https://github.com/Natethebuilder/lakehouse-fabric-winter-bootcamp-labs.git
+cd lakehouse-fabric-winter-bootcamp-labs
 az login
 az account show
 copilot
@@ -62,6 +65,9 @@ copilot
 If already cloned, open that folder instead of cloning again. Your GitHub
 sign-in enables Copilot; `az login` selects the identity for Fabric. These
 are separate sign-ins, so follow Copilot's sign-in prompt as well.
+At a hosted MicroHack, use the lab account from your dashboard for `az login`.
+For Copilot, sign in with the GitHub account that holds the Copilot seat your
+organizers arranged, not with the lab account.
 If your Fabric identity has no Azure subscription, use
 `az login --allow-no-subscriptions`. Confirm the correct tenant and identity
 with your instructor; do not paste tokens into chat.
@@ -79,21 +85,28 @@ client-specific setup. Do not copy CLI configuration into a different client.
 
 ## 2. Check access only
 
-In Copilot, replace the placeholder and paste this read-only request:
+In Copilot, replace the placeholders with the **Fabric workspace** and
+**Fabric capacity** names from your dashboard and paste this read-only request:
 
 ```text
 Use spark-cli. Check my signed-in identity and assigned workspace
-<assigned workspace name>, its capacity assignment and Active status,
-current items and my access. Confirm that it is empty.
+<assigned workspace name>: its capacity assignment and region, current
+items and that I can read it. Confirm that it is empty. Then confirm,
+read-only, that Azure capacity <Fabric capacity name> is Active with SKU F2.
 Do not create or change anything, upload files or start Spark.
 Report blockers and stop.
 ```
 
-Ask the instructor to confirm that the capacity is dedicated to your workspace
-and that the runtime supports MLVs. Do not test access by creating items. Your
-Fabric permissions are the authorization boundary: never paste credentials or
-tokens into a prompt. Because the F2 is dedicated to your workspace, nobody
-else's jobs compete with yours; run one workload at a time yourself.
+The lab automation assigns that capacity to your workspace only and keeps
+the workspace on Fabric Runtime 2.0, which supports MLVs. As a workspace
+Contributor you can read the workspace's capacity assignment (ID and region)
+in Fabric and the capacity's state in Azure, but you do not administer the
+capacity, so Fabric's own capacity list may not show it to you. If anything
+differs from your dashboard, ask the instructor. Do not test access by
+creating items. Your Fabric permissions are the authorization boundary:
+never paste credentials or tokens into a prompt. Because the F2 is dedicated
+to your workspace, nobody else's jobs compete with yours; run one workload at
+a time yourself.
 
 Check that the workspace is empty and the local [CSV files](../../data/bootcamp/)
 (five initial files and one change file) are present. If the workspace
@@ -102,7 +115,7 @@ Do not delete, reset or overwrite anything.
 
 Do not create a lakehouse, upload CSVs, provision notebooks/pipelines, create
 tables or start Spark during pre-work. Do not load prepared transformations.
-The [Lab 1 setup prompt](01-bronze.md) performs [setup](setup.md) after
+The Lab 1 setup prompt (Challenge 1) performs [setup](setup.md) after
 approval and selects each shell's unchanged stage sections from the
 [validator](validate-lakehouse.py).
 
@@ -137,4 +150,5 @@ only then should her current profile become Amsterdam / Premium.
 If anything is blocked, ask the instructor before starting. Do not change
 workspaces, capacities or permissions yourself.
 
-**Next:** [Lab 1 - create the lakehouse and Bronze](01-bronze.md).
+**Next:** Lab 1 - create the lakehouse and Bronze: open Challenge 1 in the
+MicroHack console, or `challenges/challenge-01.md` in your clone.

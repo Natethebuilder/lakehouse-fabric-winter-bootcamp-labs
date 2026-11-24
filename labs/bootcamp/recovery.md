@@ -34,7 +34,7 @@ patch and exact write set. Stop for approval before executing it.
 
 Before the change-batch pipeline, approve the patch and run only the affected
 stage and its unchanged checks. After a terminal pipeline failure, use
-[Lab 4's repair and explicitly approved pipeline retry](04-materialized-view.md#if-blocked).
+Lab 4's repair and explicitly approved pipeline retry (Challenge 4, *If blocked*).
 Keep the error and result locally. Do not start a competing job, or retry
 because output retrieval failed.
 
@@ -76,4 +76,4 @@ after a rerun, not only row counts: when the baseline finds the layer
 current, the check fails if your generated cells changed any row or Delta
 version.
 
-[Back to the lab overview](../../README.md).
+[Back to the lab overview](../../Readme.md).

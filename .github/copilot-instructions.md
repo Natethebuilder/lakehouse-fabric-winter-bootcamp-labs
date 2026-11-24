@@ -32,6 +32,10 @@ the change file and run the pipeline only after Lab 4's `go`.
   active F2 capacity already assigned. Pre-work is tools, clone, sign-in and
   read-only access checks, not lakehouse/files/notebook/pipeline creation or
   Spark warm-up.
+- The MicroHack dashboard names that workspace and capacity. The participant
+  is a workspace Contributor, not a capacity administrator: read the capacity
+  assignment from the workspace and its Active state from Azure; Fabric's
+  capacity list may not show it.
 - Confirm `az account show`, the assigned workspace/capacity and proposed
   `lh_bootcamp` before the first remote write. Discover IDs; never guess them.
 - Use only that target. Never create/delete workspaces, resize/resume/pause
