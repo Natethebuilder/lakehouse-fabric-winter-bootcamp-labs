@@ -64,6 +64,10 @@ Your dashboard lists:
 - **Fabric workspace role**: Contributor, enough to create and run every lab
   item. Organizers administer the capacity.
 
+GitHub Copilot is not on the dashboard: your organizers arrange a Copilot seat
+for you separately. Sign in to Copilot CLI with the GitHub account that holds
+it, and use the lab account for `az login` and Fabric.
+
 Work from a **git clone of this repository**, not a downloaded ZIP: Copilot
 reads `.github/copilot-instructions.md`, `specs/`, `data/` and the scripts in
 `labs/bootcamp/` from your local folder.

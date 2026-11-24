@@ -124,16 +124,21 @@ For the optional challenges:
 
 ### Licenses (`groups`)
 
-- **`M365-E5-Users`** assigns Microsoft 365 E5, which includes Power BI Pro, to each lab user. The
-  lakehouse, notebooks and pipeline on the F2 need only the free Fabric license. Power BI content,
-  such as the Challenge 6 semantic model, on a capacity smaller than F64 needs Pro.
-- **`GHCPUsers`** assigns a GitHub Copilot seat. Every challenge runs in GitHub Copilot CLI, and
-  with this group participants sign in to GitHub with their lab account through single sign-on.
-  Confirm that the lab organization's Copilot policies allow Copilot CLI and MCP servers (Challenge 6
-  adds the Fabric IQ MCP server). If every participant brings their own GitHub Copilot, remove
-  `GHCPUsers` to save its surcharge.
+**`M365-E5-Users`** assigns Microsoft 365 E5, which includes Power BI Pro, to each lab user. The
+lakehouse, notebooks and pipeline on the F2 need only the free Fabric license. Power BI content,
+such as the Challenge 6 semantic model, on a capacity smaller than F64 needs Pro. The platform adds
+the group's license surcharge to the cost forecast.
 
-The platform adds each group's license surcharge to the cost forecast.
+### GitHub Copilot seats
+
+Every challenge runs in GitHub Copilot CLI, so each participant needs a GitHub account with an
+active Copilot seat. Organizers arrange these seats separately: `groups` has no Copilot group, so
+the platform neither assigns a seat nor includes one in its cost forecast. Before the event:
+
+- Give every participant a seat. Participants sign in to Copilot CLI with the GitHub account that
+  holds it, and use their lab account only for `az login` and Fabric.
+- Confirm that the policies of the organization or enterprise that owns the seats allow Copilot CLI
+  and MCP servers. Challenge 6 adds the Fabric IQ MCP server.
 
 ### Azure subscription and quota
 
@@ -150,6 +155,12 @@ The shared hook logs each preferred region's limit and usage, and warns when a r
 below what its labs need. Region fallback moves a lab to the next region only for errors that the
 platform classifies as retryable, such as `SkuNotAvailable` or `QuotaExceeded`. Any other error
 fails that lab.
+
+**Not yet verified:** the ARM error code that Fabric returns when a subscription's CU quota is
+exhausted has not been observed. If the platform does not classify it as retryable, a lab over the
+quota fails instead of moving to the next preferred region. Confirm the code in the pilot event.
+Until then, size the quota in the first preferred region for every lab rather than relying on
+region fallback.
 
 ## Regions
 
@@ -173,9 +184,10 @@ or not anyone uses it.
 These are Azure retail pay-as-you-go prices from the Azure retail prices API (`Microsoft Fabric`
 capacity-usage meters, USD, November 2026). `estimatedDailyCostsUsd` is therefore `9.12`, for the
 first region. `estimatedSharedDeploymentDailyCostsUsd` is `0` because the shared hook creates
-nothing. OneLake storage for the small fixtures is negligible. Copilot features in Fabric draw on the
-same F2's capacity units. Project Osmos in optional Challenge 5 also consumes LLM tokens; measure them
-as that challenge describes.
+nothing. The platform adds the `M365-E5-Users` license surcharge to its forecast. GitHub Copilot
+seats are arranged separately, so the forecast does not include them. OneLake storage for the small
+fixtures is negligible. Copilot features in Fabric draw on the same F2's capacity units. Project
+Osmos in optional Challenge 5 also consumes LLM tokens; measure them as that challenge describes.
 
 ### Pausing capacities
 
@@ -257,7 +269,7 @@ Remove any extra workspaces created by hand for optional Challenge 5 in the same
 | `POST /v1/workspaces returned HTTP 401` or `403` | The tenant settings exclude the platform service principal | Enable both developer settings and, if restricted, **Create workspaces** for a group that contains it, then rerun |
 | `Fabric does not list capacity ... as Active` | The deploying identity cannot read the capacity in Fabric | Check **Service principals can call Fabric public APIs**; the capacity's administrator must be the deploying identity |
 | `None of the preferred regions offers Fabric F2` | No preferred region offers F2 to the subscription | Add regions to `preferredLocation` and reimport |
-| `RegionFallbackExhausted`, `QuotaExceeded` | Not enough Fabric CU quota | Raise the quota or lower `labsPerSubscription` |
+| `RegionFallbackExhausted`, `QuotaExceeded` or another quota error | Not enough Fabric CU quota. The exact error code is unverified, so a quota error might fail the lab without trying the next region | Raise the quota or lower `labsPerSubscription`, then rerun. Record the error code for the pilot notes |
 | `No MicroHack event ID is available` | A local test without `MHH_EVENTID` | Set `$env:MHH_EVENTID` |
 | `The deploying identity is also a participant` | A local test that used your own object ID | Pass another user's object ID |
 | `Several workspaces are named ...` | A workspace was duplicated by hand | Delete the extra workspace, then rerun |
@@ -270,4 +282,6 @@ labeled Testing anyway. The template builds and lints. Both hooks parse, pass PS
 match the documented parameter blocks. Offline runs against simulated platform helpers and REST
 endpoints cover first runs, reruns, region-fallback reassignment, paused capacities, throttling,
 long-running operations and failure cases. Run a pilot event before relying on it: a live
-deployment, tenant settings, quota and licenses have not yet been proven together.
+deployment, tenant settings, quota and licenses have not yet been proven together. The pilot should
+also confirm which ARM error code Fabric returns when the CU quota is exhausted, and whether region
+fallback retries it in the next region; see [Azure subscription and quota](#azure-subscription-and-quota).

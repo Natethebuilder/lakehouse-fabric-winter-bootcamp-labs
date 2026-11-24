@@ -66,8 +66,8 @@ If already cloned, open that folder instead of cloning again. Your GitHub
 sign-in enables Copilot; `az login` selects the identity for Fabric. These
 are separate sign-ins, so follow Copilot's sign-in prompt as well.
 At a hosted MicroHack, use the lab account from your dashboard for `az login`.
-If your event provides GitHub Copilot through that lab account, sign in to
-GitHub with it through single sign-on; otherwise use your own Copilot account.
+For Copilot, sign in with the GitHub account that holds the Copilot seat your
+organizers arranged, not with the lab account.
 If your Fabric identity has no Azure subscription, use
 `az login --allow-no-subscriptions`. Confirm the correct tenant and identity
 with your instructor; do not paste tokens into chat.
