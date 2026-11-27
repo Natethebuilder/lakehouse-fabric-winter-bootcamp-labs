@@ -3,7 +3,7 @@
 | Field | Contract |
 |---|---|
 | Goal | Explain daily Zava sales by date, store and channel while retaining customer history |
-| Target | An assigned empty workspace with its dedicated active F2 capacity; create schema-enabled `lh_bootcamp` in Lab 1 |
+| Target | An assigned empty workspace on the participant's own F2 capacity, Active 08:00–16:00 CET on bootcamp Fridays; create schema-enabled `lh_bootcamp` in Lab 1 |
 | Engine | Four layer notebooks (Bronze, Silver, Gold, MLV) written as native Spark SQL (`%%sql`) cells and chained by Change Data Feed, and one serial Data Pipeline |
 | Inputs | Five immutable initial CSVs (Lab 1) and one customer change CSV (Lab 4) under `Files/bootcamp/` |
 | Acceptance | Unchanged [fixed validator](../labs/bootcamp/validate-lakehouse.py) plus execution, CDF and MLV evidence |
@@ -65,9 +65,13 @@ expected check before approving. Restarting a conversation requires confirming
 existing resources and job state, not rerunning setup.
 
 Pre-work is tools, repository clone, sign-in and read-only access checks only.
-Each participant receives an empty workspace with a dedicated capacity already
-assigned and Active, as a workspace Contributor; the MicroHack dashboard lists
-the workspace and capacity. No lakehouse, staged CSVs, notebooks, pipeline or
+Before the bootcamp, organizer tooling gives each participant their own F2
+capacity, shared only by their bootcamp labs, and an empty workspace for this
+lab on it, `adwb-lakehouse-<shortName>`, with the participant as workspace
+Contributor; the MicroHack dashboard lists the workspace. The capacity is
+Active 08:00–16:00 CET on bootcamp Fridays and paused otherwise: a paused
+capacity outside that window is expected, and access checks accept it.
+No lakehouse, staged CSVs, notebooks, pipeline or
 warm Spark session are required in advance.
 
 The Lab 1 setup prompt confirms identity, workspace and capacity, shows the
@@ -256,9 +260,10 @@ algorithm for multiple business events between watermarks.
 - After setup approval, the setup prompt may create `lh_bootcamp`, stage the
   five initial CSVs, create the empty `Files/bootcamp/changes/` folder and
   provision the four named shells and their serial
-  pipeline. Lab 4 may upload the change CSV. The organizer's lab automation
-  supplies the empty workspace, its dedicated active capacity and the
-  participant's Contributor role; capacity administration stays with the
+  pipeline. Lab 4 may upload the change CSV. The organizer tooling supplies
+  the empty workspace, the participant's own capacity and the participant's
+  Contributor role. The participant has no Azure role on the capacity;
+  capacity administration, including its pause schedule, stays with the
   organizer.
 - Create only the tables and views specified below in `bronze`, `silver`,
   `gold` and `lab_ops`. Keep OneLake files read-only after staging.
@@ -323,9 +328,10 @@ before and after a rerun.
 
 ### Capacity and cost
 
-- Each participant's Spark work runs on their own dedicated F2, so other
-  participants cannot throttle it. A separate workspace on a shared capacity
-  gives no compute isolation; a separately assigned capacity does.
+- Each participant's Spark work runs on their own F2, shared only by their own
+  bootcamp lab workspaces, so other participants cannot throttle it. A
+  separate workspace on a shared capacity gives no compute isolation; a
+  separately assigned capacity does.
 - The Copilot-generated notebooks use Spark compute only. The optional Project
   Osmos replay also consumes LLM tokens, so start it bounded (one task, one
   workspace) and measure both: the Microsoft Fabric Capacity Metrics app for
@@ -574,7 +580,7 @@ instead of recreating the views.
 
 | Checkpoint | Required evidence |
 |---|---|
-| Pre-work | Tools and sign-in ready; assigned empty workspace with dedicated active capacity; five initial CSVs and one change CSV available locally |
+| Pre-work | Tools and sign-in ready; assigned empty workspace on the participant's own capacity, which may be paused outside the running window; five initial CSVs and one change CSV available locally |
 | Lab 1 setup | Approved schema-enabled lakehouse, five exact uploads, the empty `changes/` folder, four bound shells with fixed checks and an unscheduled serial pipeline; actual IDs and completion evidence |
 | Bronze | Fixed `bronze` initial-load PASS and built-by-this-run PASS; source values, string types and audit lineage intact; CDF on every Bronze table |
 | Silver | Fixed `silver` initial-load PASS and built-by-this-run PASS; typed values exact; six initial history versions; CDF on every Silver table; five current Bronze-to-Silver watermarks |

@@ -27,8 +27,9 @@ Check Power BI authoring licensing for your workspace (normally Pro/PPU),
 workspace access, Direct Lake availability and the model-authoring endpoint.
 An F2 capacity or GitHub Copilot subscription does not grant Power BI
 authoring rights. At a hosted MicroHack your lab account normally has a
-Microsoft 365 E5 license, which includes Power BI Pro; your dashboard's
-**Fabric workspace role** (Contributor) lets you create the model item.
+Microsoft 365 E5 license, which includes Power BI Pro; your Contributor role
+on the workspace lets you create the model item. Your capacity is Active only
+08:00–16:00 CET on bootcamp Fridays, so run this lab inside that window.
 If blocked, retain the design and mark creation incomplete;
 do not change capacity, permissions or workspaces.
 

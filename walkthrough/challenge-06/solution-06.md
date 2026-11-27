@@ -14,9 +14,11 @@ Based on the [specification](../../specs/bootcamp-lakehouse.spec.md) sections
   ([Challenge 4 walkthrough](../challenge-04/solution-04.md)).
 - Authoring, licensing and client capabilities are discovered first (spec
   section 9). Creating a Power BI semantic model in a workspace on an F2 needs a
-  Power BI Pro license; the lab automation's `M365-E5-Users` group normally
+  Power BI Pro license; the lab's `M365-E5-Users` license group normally
   provides it through Microsoft 365 E5. The participant's Contributor role can
-  create the model item. Missing access or features are incomplete outcomes,
+  create the model item. Direct Lake and Fabric IQ need the participant's
+  capacity Active, so the lab runs 08:00–16:00 CET on a bootcamp Friday.
+  Missing access or features are incomplete outcomes,
   not permission to change infrastructure or invent results.
 
 ## Task 1: Approve the model before creation

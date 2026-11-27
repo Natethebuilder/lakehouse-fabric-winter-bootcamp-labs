@@ -8,7 +8,7 @@
 
 | Goal | Start | Open | Finish signal |
 |---|---|---|---|
-| Land a replayable source, without changing its meaning | Empty assigned workspace on dedicated active F2 | Copilot at repo root, then `nb_bootcamp_bronze` | Setup verified and Bronze initial-load PASS |
+| Land a replayable source, without changing its meaning | Empty assigned workspace on your own active F2 | Copilot at repo root, then `nb_bootcamp_bronze` | Setup verified and Bronze initial-load PASS |
 
 **Watch, work, check:** watch the instructor's setup approval, then use your
 own workspace name. While your job runs, review the generated cells and wait;
@@ -18,12 +18,14 @@ do not launch another run. Your own PASS, not the instructor's, unlocks Lab 2.
 order `O1003` as received. Her Amsterdam / Premium change is still only a
 local file; do not upload it until Lab 4.
 
-Start Copilot from the repo root with your assigned **empty workspace** on its
-dedicated active F2 capacity. Your MicroHack dashboard lists them as
-**Fabric workspace** and **Fabric capacity**. No lakehouse, uploaded files,
-notebooks or warm Spark session are required yet. This slot includes
-[setup](../labs/bootcamp/setup.md), cold startup and the generated Bronze
-ingestion.
+Start Copilot from the repo root with your assigned **empty workspace**, which
+your MicroHack dashboard lists as **Fabric workspace**
+(`adwb-lakehouse-<shortName>`). It is on your own F2 capacity, shared only by
+your bootcamp labs and Active 08:00–16:00 CET on bootcamp Fridays; stop any
+notebook session still running in your other bootcamp workspaces first.
+No lakehouse, uploaded files, notebooks or warm Spark session are required
+yet. This slot includes [setup](../labs/bootcamp/setup.md), cold startup and
+the generated Bronze ingestion.
 
 ## Actions
 
@@ -44,7 +46,7 @@ dashboard and paste:
 ```text
 Use the spark-cli skill.
 Goal: set up lh_bootcamp in my assigned workspace <assigned workspace name>,
-which starts empty with a dedicated F2 capacity already assigned.
+which starts empty on my own F2 capacity, already assigned.
 Run az account show; confirm workspace, capacity and contents.
 Propose the plan and tasks from specs/bootcamp-lakehouse.spec.md, save them
 under specs/plans/ and show the setup write set from labs/bootcamp/setup.md.
@@ -54,9 +56,10 @@ Preserve other workspaces, capacities and permissions.
 Do not generate Bronze code yet.
 ```
 
-**Decision 1 · setup go/no-go.** Check that the identity, workspace and
-capacity are yours and match your dashboard, the workspace is empty, and the
-write set is exactly one schema-enabled `lh_bootcamp`, five uploads, an empty
+**Decision 1 · setup go/no-go.** Check that the identity and workspace are
+yours and match your dashboard, the workspace is empty and on a capacity that
+Fabric does not report as paused, and the write set is exactly one
+schema-enabled `lh_bootcamp`, five uploads, an empty
 `changes/` folder, four empty notebooks and their pipeline, in your assigned
 workspace only. Then reply `approve`. Setup approval does not authorize
 running transformations.

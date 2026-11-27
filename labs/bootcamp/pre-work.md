@@ -1,9 +1,11 @@
 # Pre-work: get ready
 
 Prepare tools and access before the session. Begin the live build with an
-**empty workspace** and a dedicated active F2 capacity already assigned.
-At a hosted MicroHack the lab automation provides both, and your dashboard
-lists them as **Fabric workspace** and **Fabric capacity**.
+**empty workspace** already on your own F2 capacity. The organizers create
+both before the bootcamp, and your dashboard lists the workspace as
+**Fabric workspace** (`adwb-lakehouse-<shortName>`). The F2 is shared only by
+your own bootcamp labs. It is Active 08:00–16:00 CET on bootcamp Fridays and
+paused at all other times; a paused capacity outside that window is expected.
 Lab 1 creates the lakehouse, stages the five initial CSVs and provisions
 shells/pipeline; setup and cold Spark startup count inside the 45-minute build.
 
@@ -45,10 +47,10 @@ You need:
 
 - Git, Python 3.10+ and Azure CLI.
 - GitHub Copilot CLI with an active Copilot account.
-- Your assigned empty Fabric workspace and its dedicated active F2 capacity
-  with Materialized Lake View support. Your **Fabric workspace role**
-  (Contributor) permits creating the lakehouse, notebooks and pipeline;
-  organizers administer the capacity.
+- Your assigned empty Fabric workspace on your own F2 capacity, with
+  Materialized Lake View support. Your Contributor role on the workspace
+  permits creating the lakehouse, notebooks and pipeline; organizers
+  administer the capacity, and you have no Azure role on it.
 - The public [Skills for Fabric](https://github.com/microsoft/skills-for-fabric)
   bundle, including `spark-cli`.
 
@@ -65,9 +67,10 @@ copilot
 If already cloned, open that folder instead of cloning again. Your GitHub
 sign-in enables Copilot; `az login` selects the identity for Fabric. These
 are separate sign-ins, so follow Copilot's sign-in prompt as well.
-At a hosted MicroHack, use the lab account from your dashboard for `az login`.
-For Copilot, sign in with the GitHub account that holds the Copilot seat your
-organizers arranged, not with the lab account.
+At a hosted MicroHack, sign in with `az login --tenant <Lab tenant ID>` and
+the lab account from your dashboard. For Copilot, sign in with the GitHub
+account that holds the Copilot seat your organizers arranged, not with the
+lab account.
 If your Fabric identity has no Azure subscription, use
 `az login --allow-no-subscriptions`. Confirm the correct tenant and identity
 with your instructor; do not paste tokens into chat.
@@ -85,28 +88,31 @@ client-specific setup. Do not copy CLI configuration into a different client.
 
 ## 2. Check access only
 
-In Copilot, replace the placeholders with the **Fabric workspace** and
-**Fabric capacity** names from your dashboard and paste this read-only request:
+In Copilot, replace the placeholder with the **Fabric workspace** name from
+your dashboard and paste this read-only request:
 
 ```text
 Use spark-cli. Check my signed-in identity and assigned workspace
-<assigned workspace name>: its capacity assignment and region, current
-items and that I can read it. Confirm that it is empty. Then confirm,
-read-only, that Azure capacity <Fabric capacity name> is Active with SKU F2.
+<assigned workspace name>: that I can read it, its capacity assignment
+(capacity ID and region) and its current items. Confirm that it is empty.
+Do not check or resume the capacity in Azure; I have no role on it.
+If Fabric reports the capacity as paused, say so: outside 08:00–16:00 CET
+on a bootcamp Friday that is expected, not a blocker.
 Do not create or change anything, upload files or start Spark.
 Report blockers and stop.
 ```
 
-The lab automation assigns that capacity to your workspace only and keeps
-the workspace on Fabric Runtime 2.0, which supports MLVs. As a workspace
-Contributor you can read the workspace's capacity assignment (ID and region)
-in Fabric and the capacity's state in Azure, but you do not administer the
-capacity, so Fabric's own capacity list may not show it to you. If anything
-differs from your dashboard, ask the instructor. Do not test access by
-creating items. Your Fabric permissions are the authorization boundary:
-never paste credentials or tokens into a prompt. Because the F2 is dedicated
-to your workspace, nobody else's jobs compete with yours; run one workload at
-a time yourself.
+The organizers put that workspace on your own F2, which only your bootcamp
+labs share. New workspaces use Fabric Runtime 2.0, which supports MLVs. As a
+workspace Contributor you can read the workspace's capacity assignment (ID
+and region) in Fabric, but you have no Azure role on the capacity and do not
+administer it, so neither Azure nor Fabric's capacity list shows it to you.
+If the workspace is missing or not empty, or the capacity is paused during
+08:00–16:00 CET on a bootcamp Friday, ask the instructor. Do not test access
+by creating items. Your Fabric permissions are the authorization boundary:
+never paste credentials or tokens into a prompt. Nobody else's jobs compete
+with yours, but your other bootcamp labs run on the same F2: stop their
+notebook sessions before you start, and run one workload at a time.
 
 Check that the workspace is empty and the local [CSV files](../../data/bootcamp/)
 (five initial files and one change file) are present. If the workspace
@@ -141,8 +147,9 @@ only then should her current profile become Amsterdam / Premium.
 ## Ready check
 
 - GitHub Copilot, `spark-cli`, Python and Azure CLI are available; sign-in works.
-- Correct identity and assigned **empty workspace**, with its dedicated F2
-  capacity already assigned and Active.
+- Correct identity and assigned **empty workspace**, already on your own F2
+  capacity. Outside 08:00–16:00 CET on bootcamp Fridays the capacity is
+  paused; that is expected.
 - The five initial CSVs and the change CSV exist locally under
   `data/bootcamp/`; no upload is required yet.
 - No lakehouse, notebooks, pipeline, data tables or Spark session exist yet.

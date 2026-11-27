@@ -16,8 +16,8 @@ compare its actual outputs against the same fixed contracts.
 This lab starts from the [Lab 1 setup checkpoint](../labs/bootcamp/setup.md#4-wire-the-serial-pipeline):
 staged CSVs and empty notebook implementations, with no built tables.
 Do not overwrite your completed live build. For a separate replay, ask the
-instructor to assign a fresh empty workspace with its dedicated active capacity;
-the lab automation provisions only the workspace on your dashboard.
+instructor to assign a fresh empty workspace with an active capacity; the
+organizers provision only the workspace on your dashboard.
 Confirm the new target, then run only the
 [Lab 1 setup prompt](challenge-01.md); skip the Bronze prompt.
 Do not reset resources, create workspaces or change capacity yourself.
@@ -87,7 +87,7 @@ start with this one bounded task in one workspace and run it alone. Measure
 both: the Microsoft Fabric Capacity Metrics app for Spark and the Project
 Osmos consumption page for the agent. A separate workspace on a shared
 capacity gives no compute isolation, while a separately assigned capacity
-does; that is why each participant has a dedicated F2. If a capacity is
+does; that is why each participant has their own F2. If a capacity is
 shared, ask your instructor about on-demand (autoscale) billing for Spark. Its
 capacity-unit limit bounds Spark compute, not LLM tokens.
 

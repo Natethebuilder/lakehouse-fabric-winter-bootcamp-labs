@@ -13,10 +13,12 @@ contains no implementation code: participants generate it live.
 
 ## Prerequisites
 
-- The participant's dashboard lists their own **Fabric workspace**, on a
-  dedicated, Active F2 (**Fabric capacity**), with the **Fabric workspace
-  role** Contributor. Before Lab 1 the workspace is empty: no lakehouse,
-  staged CSVs, notebooks, pipeline or warm Spark session.
+- The participant's dashboard lists their own **Fabric workspace**,
+  `adwb-lakehouse-<shortName>`, which organizer tooling created on the
+  participant's own F2 (shared only by their bootcamp labs) with the
+  participant as Contributor. The capacity is Active 08:00–16:00 CET on
+  bootcamp Fridays and paused otherwise. Before Lab 1 the workspace is empty:
+  no lakehouse, staged CSVs, notebooks, pipeline or warm Spark session.
 - The participant works from a git clone, has completed the
   [pre-work](../../labs/bootcamp/pre-work.md) and runs Copilot from the
   repository root with `spark-cli`.
@@ -114,9 +116,12 @@ An optional second **Run all** in the warm session ends with
 | `Rerunning the bronze generated cell changed an already-current layer` | A statement commits on a rerun, for example rewriting a raw table, re-enabling a property or a MERGE that matches unchanged rows. |
 
 Access or capacity blocks during setup are not code problems. Check that the
-dashboard's workspace, capacity and role match what Copilot discovered, and
+workspace Copilot discovered matches the dashboard's **Fabric workspace** and
+is assigned to a capacity. A paused capacity outside 08:00–16:00 CET on a
+bootcamp Friday is expected. Inside that window, or for a missing workspace,
 escalate to the organizers rather than creating or changing workspaces,
-capacities or permissions.
+capacities or permissions. Participants have no Azure role on the capacity,
+so an Azure lookup of it fails by design.
 
 ## Recovery
 

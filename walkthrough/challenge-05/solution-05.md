@@ -13,7 +13,7 @@ Based on the [specification](../../specs/bootcamp-lakehouse.spec.md) sections
 
 - A **fresh approved target** (spec section 9): a separate empty workspace on
   its own active capacity, so the replay never overwrites a completed live
-  build. The lab automation provisions only each participant's live-build
+  build. The organizer tooling provisions only each participant's live-build
   workspace; provide this second target by hand if you offer the lab.
 - That target has reached the Lab 1 setup checkpoint (spec section 8):
   schema-enabled `lh_bootcamp`, five exact uploads, the empty `changes/`

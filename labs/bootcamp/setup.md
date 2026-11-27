@@ -1,8 +1,9 @@
 # Lab 1 setup: empty workspace to bound shells
 
 The Lab 1 setup prompt (Challenge 1) performs this procedure after setup
-approval (decision 1). Start from the assigned empty workspace; its dedicated F2 capacity
-is already assigned and Active. Do not perform these writes during pre-work.
+approval (decision 1). Start from the assigned empty workspace, already on the
+participant's own F2 capacity, which is Active 08:00–16:00 CET on bootcamp
+Fridays and paused otherwise. Do not perform these writes during pre-work.
 Setup and cold Spark startup count inside Lab 1's 13-minute slot.
 
 **Reference for Copilot and troubleshooting, not another exercise.** In the
@@ -18,10 +19,13 @@ Bronze data has been loaded. Return to the separate Bronze prompt afterward.
 
 Use `spark-cli` and the signed-in CLI identity (`az account show`). Discover
 the exact assigned workspace, its capacity and current items. On a first run
-it must be empty. The participant is a workspace Contributor, not a capacity
-administrator: read the capacity assignment (ID and region) from the
-workspace, the capacity's Active state from Azure, and compare both with the
-dashboard's **Fabric capacity** entries. Show the identity, workspace,
+it must be empty, and its name must match the dashboard's **Fabric workspace**
+entry. The participant is a workspace Contributor with no Azure role on the
+capacity and is not its administrator: read the capacity assignment (ID and
+region) from the workspace; neither Azure nor Fabric's capacity list may show
+the capacity itself. If Fabric reports the capacity as paused, stop: outside
+the running window that is expected, and inside it the instructor must
+resolve it. Never try to resume it. Show the identity, workspace,
 capacity, proposed lakehouse, five upload destinations, four notebooks and
 pipeline; obtain setup approval before the first remote write. Do not
 create/reassign workspaces or capacities, change permissions or guess IDs.

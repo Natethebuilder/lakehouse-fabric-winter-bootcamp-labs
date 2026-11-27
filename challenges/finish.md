@@ -17,6 +17,9 @@ supplied or incomplete stages. Never change fixtures or checks to force a pass.
 
 ## Optional labs after the session
 
+Run them before 16:00 CET on a bootcamp Friday: capacities are paused outside
+08:00–16:00 CET on bootcamp Fridays.
+
 | Lab | Definition of done |
 |---|---|
 | [5. Project Osmos](challenge-05.md) | Replay in a fresh approved target; the same fixed checks pass. |

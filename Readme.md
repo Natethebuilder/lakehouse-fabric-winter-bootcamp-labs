@@ -54,15 +54,21 @@ After completing this MicroHack you will be able to:
 
 ## General prerequisites
 
-The MicroHack lab automation prepares each participant before the session.
-Your dashboard lists:
+Before the bootcamp, the organizers give you your own Fabric capacity, an F2
+shared only by your own bootcamp labs, and an empty workspace for this lab on
+it. You are a Contributor on the workspace: enough to create and run every
+lab item. The organizers administer the capacity. It is Active 08:00–16:00 CET
+on bootcamp Fridays and paused at all other times, so a paused capacity
+outside that window is expected.
+
+Your MicroHack dashboard lists:
 
 - your lab account, for Fabric and Azure sign-in;
-- **Fabric workspace** and **Fabric workspace URL**: your own empty workspace;
-- **Fabric capacity**, **Fabric capacity SKU** and **Fabric capacity region**:
-  the dedicated, Active F2 assigned to that workspace;
-- **Fabric workspace role**: Contributor, enough to create and run every lab
-  item. Organizers administer the capacity.
+- **Fabric workspace**: your empty workspace for this lab,
+  `adwb-lakehouse-<shortName>`, where `<shortName>` is the part of your lab
+  account before `@`, in lowercase;
+- **Fabric portal**: where you open that workspace with your lab account;
+- **Lab tenant ID**: for `az login --tenant`.
 
 GitHub Copilot is not on the dashboard: your organizers arrange a Copilot seat
 for you separately. Sign in to Copilot CLI with the GitHub account that holds
@@ -78,8 +84,8 @@ cd lakehouse-fabric-winter-bootcamp-labs
 ```
 
 Complete [pre-work](labs/bootcamp/pre-work.md): tools, clone, sign-in,
-access, **where to type** and a glossary. Start with an assigned **empty
-workspace on a dedicated active F2**. Create nothing and do not warm Spark.
+access, **where to type** and a glossary. Start with your assigned **empty
+workspace on your own F2**. Create nothing and do not warm Spark.
 If you get blocked during the labs, use [repair and recovery](labs/bootcamp/recovery.md).
 
 ## How the session runs
@@ -111,7 +117,8 @@ Use one Spark workload at a time; run the pipeline only **after all four checks 
 
 Lab N is Challenge N. After Lab 4, the Finish page wraps up the live session:
 explain the two answers and stop at session minute 60. Labs 5 and 6 are
-optional and run after the session.
+optional and run after the session, before 16:00 CET while capacities are
+still Active.
 
 Keep source files immutable. Use only your confirmed workspace and lakehouse;
 change no capacity or permissions. Never paste credentials into prompts or
@@ -140,8 +147,10 @@ Coach guides: expected check output, decision moments, common failures and recov
 
 ## For organizers
 
-The lab automation in the repository's `labautomation` folder gives every
-participant their own empty Fabric workspace on a dedicated, Active F2
-capacity, with several participants per Azure subscription. Its README covers
-tenant settings, licenses, quota, cost and cleanup. The folder is not
-published to participants or coaches.
+Before the bootcamp, the organizer tooling gives every participant their own
+Fabric capacity and an empty `adwb-lakehouse-<shortName>` workspace on it.
+This lab deploys nothing: the lab automation in the repository's
+`labautomation` folder only puts the workspace name, the Fabric portal and the
+lab tenant ID on each participant's dashboard. Its README covers the shared
+contract, tenant settings, licenses and cost. The folder is not published to
+participants or coaches.
