@@ -2,9 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/MicroHack/refs/heads/main/lab-defaults-schema.json",
   "groups": ["M365-E5-Users"],
   "deploymentType": "resourcegroup",
-  "labsPerSubscription": 5,
-  "preferredLocation": "swedencentral, northeurope, westeurope",
-  "estimatedDailyCostsUsd": 9.12,
+  "labsPerSubscription": 100,
+  "preferredLocation": "swedencentral",
+  "estimatedDailyCostsUsd": 1,
   "estimatedSharedDeploymentDailyCostsUsd": 0,
   "Quality": "Testing",
   "contentPreparation": {
